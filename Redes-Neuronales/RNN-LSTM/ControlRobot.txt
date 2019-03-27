@@ -1,0 +1,1 @@
+izquierdoMucho y derechoMucho entonces recto. izquierdoPoco y derechoPoco entonces recto. izquierdoMedio y derechoMedio entonces recto. izquierdoMucho y derechoPoco entonces izquierda. izquierdoPoco y derechoMucho entonces derecha.
