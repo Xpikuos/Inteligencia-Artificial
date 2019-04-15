@@ -1,4 +1,5 @@
-Todo el contenido genérico sobre Microredes
+Todo el contenido sobre Microredes
+
 ▶ SUSCRÍBETE al canal de slack para más información sobre Microredes: http://bit.ly/ia-microredes-xpikuos
 
 ▶ Enlace a la lista de reproducción de los vídeos de Xpikuos en donde se irá explicando detalladamente el contenido de dicho documento: http://bit.ly/youtube-ia-microredes-xpikuos
