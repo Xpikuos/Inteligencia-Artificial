@@ -1,8 +1,0 @@
-E:\XudonV2\XudonV2NetStandard\bin\Debug\netstandard2.0\XudonV2NetStandard.deps.json
-E:\XudonV2\XudonV2NetStandard\bin\Debug\netstandard2.0\XudonV2NetStandard.dll
-E:\XudonV2\XudonV2NetStandard\bin\Debug\netstandard2.0\XudonV2NetStandard.pdb
-E:\XudonV2\XudonV2NetStandard\obj\Debug\netstandard2.0\XudonV2NetStandard.csproj.CoreCompileInputs.cache
-E:\XudonV2\XudonV2NetStandard\obj\Debug\netstandard2.0\XudonV2NetStandard.AssemblyInfoInputs.cache
-E:\XudonV2\XudonV2NetStandard\obj\Debug\netstandard2.0\XudonV2NetStandard.AssemblyInfo.cs
-E:\XudonV2\XudonV2NetStandard\obj\Debug\netstandard2.0\XudonV2NetStandard.dll
-E:\XudonV2\XudonV2NetStandard\obj\Debug\netstandard2.0\XudonV2NetStandard.pdb
