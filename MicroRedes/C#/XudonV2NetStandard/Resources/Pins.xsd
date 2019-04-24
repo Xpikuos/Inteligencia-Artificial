@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:pin-schema" targetNamespace="urn:pin-schema">
+  <xs:element name="Pins">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Pin">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:string" />
+              <xs:element name="source">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="type" type="xs:string" />
+                    <xs:element name="model" type="xs:string" />
+                    <xs:element name="version" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="value">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="type" type="xs:string" />
+                    <xs:element name="maxValue" type="xs:decimal" />
+                    <xs:element name="minValue" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
