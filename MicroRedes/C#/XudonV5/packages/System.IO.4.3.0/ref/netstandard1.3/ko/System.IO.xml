@@ -1,0 +1,2235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.IO</name>
+  </assembly>
+  <members>
+    <member name="T:System.IO.BinaryReader">
+      <summary>기본 데이터 형식을 특정 인코딩의 이진 값으로 읽습니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.#ctor(System.IO.Stream)">
+      <summary>지정된 스트림을 기반으로 UTF-8 인코딩을 사용하여 <see cref="T:System.IO.BinaryReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="input">입력 스트림입니다. </param>
+      <exception cref="T:System.ArgumentException">스트림이 읽기를 지원하지 않거나 null이거나 이미 닫힌 경우 </exception>
+    </member>
+    <member name="M:System.IO.BinaryReader.#ctor(System.IO.Stream,System.Text.Encoding)">
+      <summary>지정된 스트림과 문자 인코딩을 기반으로 <see cref="T:System.IO.BinaryReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="input">입력 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <exception cref="T:System.ArgumentException">스트림이 읽기를 지원하지 않거나 null이거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="encoding" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.BinaryReader.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean)">
+      <summary>지정된 스트림과 문자 인코딩을 기반으로 하는 <see cref="T:System.IO.BinaryReader" /> 클래스의 새 인스턴스를 초기화하고 스트림을 선택적으로 연 상태로 둡니다.</summary>
+      <param name="input">입력 스트림입니다.</param>
+      <param name="encoding">사용할 문자 인코딩입니다.</param>
+      <param name="leaveOpen">
+        <see cref="T:System.IO.BinaryReader" /> 개체를 삭제한 후 스트림을 열어 두려면 true이고, 닫으려면 false입니다.</param>
+      <exception cref="T:System.ArgumentException">스트림이 읽기를 지원하지 않거나 null이거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="encoding" /> 또는 <paramref name="input" />가 null인 경우 </exception>
+    </member>
+    <member name="P:System.IO.BinaryReader.BaseStream">
+      <summary>
+        <see cref="T:System.IO.BinaryReader" />의 내부 스트림에 대한 액세스를 노출합니다.</summary>
+      <returns>BinaryReader와 관련된 내부 스트림입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.Dispose">
+      <summary>
+        <see cref="T:System.IO.BinaryReader" /> 클래스의 현재 인스턴스에서 사용하는 모든 리소스를 해제합니다.</summary>
+    </member>
+    <member name="M:System.IO.BinaryReader.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.BinaryReader" /> 클래스에 사용되는 관리되지 않는 리소스를 해제하고, 필요에 따라 관리되는 리소스를 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="M:System.IO.BinaryReader.FillBuffer(System.Int32)">
+      <summary>스트림에서 읽은 지정된 바이트 수로 내부 버퍼를 채웁니다.</summary>
+      <param name="numBytes">읽을 바이트 수입니다. </param>
+      <exception cref="T:System.IO.EndOfStreamException">
+        <paramref name="numBytes" />를 읽기 전에 스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">요청된 <paramref name="numBytes" />가 내부 버퍼 크기보다 큰 경우</exception>
+    </member>
+    <member name="M:System.IO.BinaryReader.PeekChar">
+      <summary>사용할 수 있는 다음 문자를 반환하고 바이트 또는 문자 위치를 앞으로 이동하지 않습니다.</summary>
+      <returns>사용할 수 있는 다음 문자를 반환하고 사용할 수 있는 문자가 더 이상 없거나 스트림에서 검색을 지원하지 않을 경우 -1을 반환합니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ArgumentException">현재 문자는 스트림에 선택한 <see cref="T:System.Text.Encoding" />을 사용하여 내부 문자 버퍼링으로 디코딩할 수 없습니다.</exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.Read">
+      <summary>내부 스트림에서 문자를 읽고 사용된 Encoding과 스트림에서 읽어오는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <returns>입력 스트림의 다음 문자를 반환하고 현재 사용할 수 있는 문자가 없을 경우 -1을 반환합니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>바이트 배열의 지정된 지점부터 스트림에서 지정된 바이트 수만큼 읽습니다. </summary>
+      <returns>
+        <paramref name="buffer" />로 읽어 온 바이트 수입니다.이 바이트 수는 바이트가 충분하지 않은 경우 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달하면 0이 됩니다.</returns>
+      <param name="buffer">데이터를 읽어올 버퍼입니다. </param>
+      <param name="index">버퍼로 읽어오기를 시작할 버퍼의 시작 위치입니다. </param>
+      <param name="count">읽을 바이트 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 또는읽을 수 있도록 디코딩된 문자의 수는 <paramref name="count" />보다 큽니다.유니코드 디코더가 대체 문자 또는 서로게이트 쌍을 반환하는 경우 이 문제가 발생할 수 있습니다.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.Read(System.Char[],System.Int32,System.Int32)">
+      <summary>문자 배열의 지정된 지점부터 스트림에서 지정된 문자 수만큼 읽습니다.</summary>
+      <returns>버퍼로 읽어온 총 문자 수입니다.이 문자 수는 문자가 현재 충분하지 않은 경우 요청된 문자 수보다 작을 수 있으며 스트림의 끝에 도달하면 0이 됩니다.</returns>
+      <param name="buffer">데이터를 읽어올 버퍼입니다. </param>
+      <param name="index">버퍼로 읽어오기를 시작할 버퍼의 시작 위치입니다. </param>
+      <param name="count">읽을 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 또는읽을 수 있도록 디코딩된 문자의 수는 <paramref name="count" />보다 큽니다.유니코드 디코더가 대체 문자 또는 서로게이트 쌍을 반환하는 경우 이 문제가 발생할 수 있습니다.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.Read7BitEncodedInt">
+      <summary>압축 형식의 32비트 정수를 읽습니다.</summary>
+      <returns>압축 형식의 32비트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">스트림이 손상되었습니다.</exception>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadBoolean">
+      <summary>현재 스트림에서 Boolean 값을 읽고 스트림의 현재 위치를 1바이트 앞으로 이동합니다.</summary>
+      <returns>바이트가 0이 아니면 true이고 0이면 false입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadByte">
+      <summary>현재 스트림에서 다음 바이트를 읽고 스트림의 현재 위치를 1바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 다음 바이트입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadBytes(System.Int32)">
+      <summary>현재 스트림에서 지정된 바이트 수만큼 바이트 배열로 읽어 오고 현재 위치를 해당 바이트 수만큼 앞으로 이동합니다.</summary>
+      <returns>내부 스트림에서 읽은 데이터를 포함하는 바이트 배열입니다.이 바이트 배열은 스트림의 끝에 도달할 경우 요청된 바이트 수보다 작을 수 있습니다.</returns>
+      <param name="count">읽을 바이트 수입니다.이 값은 0 또는 음수가 아닌 숫자여야 합니다. 그렇지 않으면 예외가 발생합니다.</param>
+      <exception cref="T:System.ArgumentException">읽을 수 있도록 디코딩된 문자의 수는 <paramref name="count" />보다 큽니다.유니코드 디코더가 대체 문자 또는 서로게이트 쌍을 반환하는 경우 이 문제가 발생할 수 있습니다.</exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="count" />가 음수인 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadChar">
+      <summary>현재 스트림에서 다음 문자를 읽고 사용된 Encoding과 스트림에서 읽어오는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 문자입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ArgumentException">서로게이트 문자를 읽은 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadChars(System.Int32)">
+      <summary>현재 스트림에서 지정된 문자 수만큼 읽어 문자 배열로 데이터를 반환하고, 사용된 Encoding과 스트림에서 읽어 오는 특정 문자의 길이만큼 현재 위치를 앞으로 이동합니다.</summary>
+      <returns>내부 스트림에서 읽은 데이터를 포함하는 문자 배열입니다.이 문자 배열은 스트림의 끝에 도달할 경우 요청된 문자 수보다 작을 수 있습니다.</returns>
+      <param name="count">읽을 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">읽을 수 있도록 디코딩된 문자의 수는 <paramref name="count" />보다 큽니다.유니코드 디코더가 대체 문자 또는 서로게이트 쌍을 반환하는 경우 이 문제가 발생할 수 있습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="count" />가 음수인 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadDecimal">
+      <summary>현재 스트림에서 10진 값을 읽고 스트림의 현재 위치를 16바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 10진 값입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadDouble">
+      <summary>현재 스트림에서 8바이트 부동 소수점 값을 읽고 스트림의 현재 위치를 8바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 8바이트 부동 소수점 값입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadInt16">
+      <summary>현재 스트림에서 부호 있는 2바이트 정수를 읽고 스트림의 현재 위치를 2바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 있는 2바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadInt32">
+      <summary>현재 스트림에서 부호 있는 4바이트 정수를 읽고 스트림의 현재 위치를 4바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 있는 4바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadInt64">
+      <summary>현재 스트림에서 부호 있는 8바이트 정수를 읽고 스트림의 현재 위치를 8바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 있는 8바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadSByte">
+      <summary>현재 스트림에서 부호 있는 바이트를 읽고 스트림의 현재 위치를 1바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 있는 바이트입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadSingle">
+      <summary>현재 스트림에서 4바이트 부동 소수점 값을 읽고 스트림의 현재 위치를 4바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 4바이트 부동 소수점 값입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadString">
+      <summary>현재 스트림에서 문자열을 읽습니다.한 번에 7비트 정수로 인코드된 길이는 해당 문자열의 접두사로 붙습니다.</summary>
+      <returns>읽어 오는 문자열입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadUInt16">
+      <summary>little-endian 인코딩을 사용하여 현재 스트림에서 부호 없는 2바이트 정수를 읽고 스트림의 위치를 2바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 없는 2바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadUInt32">
+      <summary>현재 스트림에서 부호 없는 4바이트 정수를 읽고 스트림의 위치를 4바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 없는 4바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryReader.ReadUInt64">
+      <summary>현재 스트림에서 부호 없는 8바이트 정수를 읽고 스트림의 위치를 8바이트 앞으로 이동합니다.</summary>
+      <returns>현재 스트림에서 읽은 부호 없는 8바이트 정수입니다.</returns>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="T:System.IO.BinaryWriter">
+      <summary>기본 이진 형식을 스트림에 쓰고 특정 인코딩으로 된 문자열 쓰기를 지원합니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.#ctor">
+      <summary>스트림에 쓰는 <see cref="T:System.IO.BinaryWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.BinaryWriter.#ctor(System.IO.Stream)">
+      <summary>지정된 스트림을 기반으로 UTF-8 인코딩을 사용하여 <see cref="T:System.IO.BinaryWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="output">출력 스트림입니다. </param>
+      <exception cref="T:System.ArgumentException">스트림이 쓰기를 지원하지 않거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="output" />가 null입니다. </exception>
+    </member>
+    <member name="M:System.IO.BinaryWriter.#ctor(System.IO.Stream,System.Text.Encoding)">
+      <summary>지정된 스트림과 문자 인코딩을 기반으로 <see cref="T:System.IO.BinaryWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="output">출력 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <exception cref="T:System.ArgumentException">스트림이 쓰기를 지원하지 않거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="output" /> 또는 <paramref name="encoding" />이 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.BinaryWriter.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean)">
+      <summary>지정된 스트림과 문자 인코딩을 기반으로 <see cref="T:System.IO.BinaryWriter" /> 클래스의 새 인스턴스를 초기화하며, 선택적으로 스트림을 연 상태로 둘 수 있습니다.</summary>
+      <param name="output">출력 스트림입니다.</param>
+      <param name="encoding">사용할 문자 인코딩입니다.</param>
+      <param name="leaveOpen">
+        <see cref="T:System.IO.BinaryWriter" /> 개체를 삭제한 후 스트림을 열어 두려면 true이고, 그렇지 않으면 false입니다.</param>
+      <exception cref="T:System.ArgumentException">스트림이 쓰기를 지원하지 않거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="output" /> 또는 <paramref name="encoding" />이 null인 경우 </exception>
+    </member>
+    <member name="P:System.IO.BinaryWriter.BaseStream">
+      <summary>
+        <see cref="T:System.IO.BinaryWriter" />의 내부 스트림을 가져옵니다.</summary>
+      <returns>BinaryWriter와 관련된 내부 스트림입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Dispose">
+      <summary>
+        <see cref="T:System.IO.BinaryWriter" /> 클래스의 현재 인스턴스에서 사용하는 모든 리소스를 해제합니다.</summary>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.BinaryWriter" />에서 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Flush">
+      <summary>현재 작성기에 대한 모든 버퍼를 지우면 버퍼링된 모든 데이터가 내부 장치에 쓰여집니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="F:System.IO.BinaryWriter.Null">
+      <summary>백업 저장소가 없는 <see cref="T:System.IO.BinaryWriter" />를 지정합니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="F:System.IO.BinaryWriter.OutStream">
+      <summary>내부 스트림을 보유합니다.</summary>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Seek(System.Int32,System.IO.SeekOrigin)">
+      <summary>현재 스트림 내에서 위치를 설정합니다.</summary>
+      <returns>현재 스트림에서의 위치입니다.</returns>
+      <param name="offset">
+        <paramref name="origin" />에 상대적인 바이트 오프셋입니다. </param>
+      <param name="origin">새 위치를 가져올 참조 위치를 나타내는 <see cref="T:System.IO.SeekOrigin" />의 필드입니다. </param>
+      <exception cref="T:System.IO.IOException">파일 포인터가 잘못된 위치로 이동한 경우 </exception>
+      <exception cref="T:System.ArgumentException">
+        <see cref="T:System.IO.SeekOrigin" /> 값이 잘못된 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Boolean)">
+      <summary>false를 나타내는 0과 true를 나타내는 1을 사용하여 1바이트 Boolean 값을 현재 스트림에 씁니다.</summary>
+      <param name="value">쓸 Boolean 값(0 또는 1)입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Byte)">
+      <summary>부호 없는 바이트를 현재 스트림에 쓰고 스트림 위치를 1바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 부호 없는 바이트입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Byte[])">
+      <summary>내부 스트림에 바이트 배열을 씁니다.</summary>
+      <param name="buffer">쓸 데이터를 포함하는 바이트 배열입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>현재 스트림에 바이트 배열 영역을 씁니다.</summary>
+      <param name="buffer">쓸 데이터를 포함하는 바이트 배열입니다. </param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 시작점입니다. </param>
+      <param name="count">쓸 바이트 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다. </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Char)">
+      <summary>유니코드 문자를 현재 스트림에 쓴 다음 사용된 Encoding과 스트림에 쓰여지는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <param name="ch">쓰려고 하는 서로게이트가 아닌 유니코드 문자입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="ch" />가 단일 서로게이트 문자인 경우</exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Char[])">
+      <summary>문자 배열을 현재 스트림에 쓴 다음 사용된 Encoding과 스트림에 쓰여지는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <param name="chars">쓸 데이터를 포함하는 문자 배열입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="chars" />가 null입니다. </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Char[],System.Int32,System.Int32)">
+      <summary>문자 배열 섹션을 현재 스트림에 쓴 다음 사용된 Encoding과 스트림에 쓰여지는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <param name="chars">쓸 데이터를 포함하는 문자 배열입니다. </param>
+      <param name="index">쓰기를 시작할 <paramref name="chars" />의 시작점입니다. </param>
+      <param name="count">쓸 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="chars" />가 null입니다. </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Decimal)">
+      <summary>10진 값을 현재 스트림에 쓰고 스트림 위치를 16바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">출력할 10진수 값입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Double)">
+      <summary>8바이트 부동 소수점 값을 현재 스트림에 쓰고 스트림 위치를 8바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 8바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Int16)">
+      <summary>2바이트 부호 있는 정수를 현재 스트림에 쓰고 스트림 위치를 2바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 2바이트 부호 있는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Int32)">
+      <summary>4바이트 부호 있는 정수를 현재 스트림에 쓰고 스트림 위치를 4바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 4바이트 부호 있는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Int64)">
+      <summary>8바이트 부호 있는 정수를 현재 스트림에 쓰고 스트림 위치를 8바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 8바이트 부호 있는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.SByte)">
+      <summary>부호 있는 바이트를 현재 스트림에 쓰고 스트림 위치를 1바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 부호 있는 바이트입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.Single)">
+      <summary>4바이트 부동 소수점 값을 현재 스트림에 쓰고 스트림 위치를 4바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 4바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.String)">
+      <summary>
+        <see cref="T:System.IO.BinaryWriter" />의 현재 인코딩으로 된 이 스트림에 문자열의 길이가 맨 앞에 나오는 문자열을 쓴 다음 사용된 인코딩과 스트림에 쓰여지는 특정 문자의 길이만큼 스트림의 현재 위치를 앞으로 이동합니다.</summary>
+      <param name="value">쓸 값입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="value" />가 null입니다. </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.UInt16)">
+      <summary>2바이트 부호 없는 정수를 현재 스트림에 쓰고 스트림 위치를 2바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 2바이트 부호 없는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.UInt32)">
+      <summary>4바이트 부호 없는 정수를 현재 스트림에 쓰고 스트림 위치를 4바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 4바이트 부호 없는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write(System.UInt64)">
+      <summary>8바이트 부호 없는 정수를 현재 스트림에 쓰고 스트림 위치를 8바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">쓸 8바이트 부호 없는 정수입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.BinaryWriter.Write7BitEncodedInt(System.Int32)">
+      <summary>압축 형식의 32비트 정수를 씁니다.</summary>
+      <param name="value">쓸 32비트 정수입니다. </param>
+      <exception cref="T:System.IO.EndOfStreamException">스트림의 끝에 도달한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.IO.IOException">스트림이 닫혀 있는 경우 </exception>
+    </member>
+    <member name="T:System.IO.EndOfStreamException">
+      <summary>읽을 때 throw되는 예외가 스트림의 끝을 지나 시도됩니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.EndOfStreamException.#ctor">
+      <summary>시스템에서 제공되는 메시지로 설정된 메시지 문자열과 COR_E_ENDOFSTREAM으로 설정된 HRESULT를 사용하여 <see cref="T:System.IO.EndOfStreamException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.EndOfStreamException.#ctor(System.String)">
+      <summary>
+        <paramref name="message" />로 설정된 메시지 문자열과 COR_E_ENDOFSTREAM으로 설정된 HRESULT를 사용하여 <see cref="T:System.IO.EndOfStreamException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">오류를 설명하는 문자열입니다.<paramref name="message" /> 내용은 사용자의 이해를 돕기 위한 것입니다.이 생성자의 호출자는 이 문자열이 현재 시스템 문화권에 맞게 지역화되었는지 확인하는 데 필요합니다.</param>
+    </member>
+    <member name="M:System.IO.EndOfStreamException.#ctor(System.String,System.Exception)">
+      <summary>지정된 오류 메시지와 해당 예외의 근본 원인인 내부 예외에 대한 참조를 사용하여 <see cref="T:System.IO.EndOfStreamException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">오류를 설명하는 문자열입니다.<paramref name="message" /> 내용은 사용자의 이해를 돕기 위한 것입니다.이 생성자의 호출자는 이 문자열이 현재 시스템 문화권에 맞게 지역화되었는지 확인하는 데 필요합니다.</param>
+      <param name="innerException">현재 예외의 원인이 되는 예외입니다.<paramref name="innerException" /> 매개 변수가 null이 아니면 현재 예외는 내부 예외를 처리하는 catch 블록에서 발생합니다.</param>
+    </member>
+    <member name="T:System.IO.InvalidDataException">
+      <summary>데이터 스트림의 형식이 잘못된 경우 throw되는 예외입니다.</summary>
+    </member>
+    <member name="M:System.IO.InvalidDataException.#ctor">
+      <summary>
+        <see cref="T:System.IO.InvalidDataException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.InvalidDataException.#ctor(System.String)">
+      <summary>지정된 오류 메시지를 사용하여 <see cref="T:System.IO.InvalidDataException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외에 대한 이유를 설명하는 오류 메시지입니다.</param>
+    </member>
+    <member name="M:System.IO.InvalidDataException.#ctor(System.String,System.Exception)">
+      <summary>이 예외의 원인인 내부 예외에 대한 참조를 사용하여 <see cref="T:System.IO.InvalidDataException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외에 대한 이유를 설명하는 오류 메시지입니다.</param>
+      <param name="innerException">현재 예외의 원인이 되는 예외입니다.<paramref name="innerException" /> 매개 변수가 null이 아니면 현재 예외는 내부 예외를 처리하는 catch 블록에서 발생합니다.</param>
+    </member>
+    <member name="T:System.IO.MemoryStream">
+      <summary>백업 저장소가 메모리인 스트림을 만듭니다.이 형식에 대 한.NET Framework 소스 코드를 찾아보려면 참조는 Reference Source.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor">
+      <summary>0으로 초기화된 확장 가능한 용량을 사용하여 <see cref="T:System.IO.MemoryStream" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Byte[])">
+      <summary>지정된 바이트 배열을 기반으로 하는 <see cref="T:System.IO.MemoryStream" /> 클래스의 크기 조정이 불가능한 새 인스턴스를 초기화합니다.</summary>
+      <param name="buffer">현재 스트림을 만들 부호 없는 바이트의 배열입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Boolean)">
+      <summary>지정된 대로 설정된 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성을 사용하여 지정된 바이트 배열을 기반으로 하는 <see cref="T:System.IO.MemoryStream" /> 클래스의 크기 조정이 불가능한 새 인스턴스를 초기화합니다.</summary>
+      <param name="buffer">이 스트림을 만들 부호 없는 바이트의 배열입니다. </param>
+      <param name="writable">스트림이 쓰기를 지원하는지 여부를 결정하는 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성의 설정입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32)">
+      <summary>바이트 배열의 지정된 영역(인덱스)을 기반으로 하는 <see cref="T:System.IO.MemoryStream" /> 클래스의 크기 조정이 불가능한 새 인스턴스를 초기화합니다.</summary>
+      <param name="buffer">이 스트림을 만들 부호 없는 바이트의 배열입니다. </param>
+      <param name="index">스트림이 시작될 <paramref name="buffer" />의 인덱스입니다. </param>
+      <param name="count">스트림의 길이(바이트)입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 0보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우</exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+      <summary>지정된 대로 설정된 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성을 사용하여 지정된 바이트 배열의 영역을 기반으로 하는 <see cref="T:System.IO.MemoryStream" /> 클래스의 크기 조정이 불가능한 새 인스턴스를 초기화합니다.</summary>
+      <param name="buffer">이 스트림을 만들 부호 없는 바이트의 배열입니다. </param>
+      <param name="index">스트림이 시작될 <paramref name="buffer" />의 인덱스입니다. </param>
+      <param name="count">스트림의 길이(바이트)입니다. </param>
+      <param name="writable">스트림이 쓰기를 지원하는지 여부를 결정하는 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성의 설정입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우</exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean)">
+      <summary>지정된 대로 설정된 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성과 지정된 대로 설정된 <see cref="M:System.IO.MemoryStream.GetBuffer" /> 호출 기능을 사용하여 지정된 바이트 배열의 영역을 기반으로 하는 <see cref="T:System.IO.MemoryStream" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="buffer">이 스트림을 만들 부호 없는 바이트의 배열입니다. </param>
+      <param name="index">스트림이 시작될 <paramref name="buffer" />의 인덱스입니다. </param>
+      <param name="count">스트림의 길이(바이트)입니다. </param>
+      <param name="writable">스트림이 쓰기를 지원하는지 여부를 결정하는 <see cref="P:System.IO.MemoryStream.CanWrite" /> 속성의 설정입니다. </param>
+      <param name="publiclyVisible">스트림을 만든 부호 없는 바이트 배열을 반환하는 <see cref="M:System.IO.MemoryStream.GetBuffer" />를 사용하도록 설정하려면 true이고, 설정하지 않으려면 false입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.#ctor(System.Int32)">
+      <summary>지정된 대로 초기화된 확장 가능한 용량을 사용하여 <see cref="T:System.IO.MemoryStream" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="capacity">내부 배열의 초기 크기(바이트)입니다. </param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="capacity" />가 음수인 경우 </exception>
+    </member>
+    <member name="P:System.IO.MemoryStream.CanRead">
+      <summary>현재 스트림이 읽기를 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 열려 있으면 true입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.MemoryStream.CanSeek">
+      <summary>현재 스트림이 검색을 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 열려 있으면 true입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.MemoryStream.CanWrite">
+      <summary>현재 스트림이 쓰기를 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 쓰기를 지원하면 true이고, 지원하지 않으면 false입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.MemoryStream.Capacity">
+      <summary>이 스트림에 할당된 바이트 수를 가져오거나 설정합니다.</summary>
+      <returns>버퍼에서 스트림에 대해 사용할 수 있는 부분의 길이입니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">음수 또는 스트림의 현재 길이보다 작은 용량이 설정되어 있는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이 닫혀 있는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">용량을 수정할 수 없는 스트림에 set이 호출되는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.MemoryStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+      <summary>현재 스트림에서 모든 바이트를 비동기적으로 읽어 지정된 버퍼 크기 및 취소 토큰을 사용하여 다른 스트림에 씁니다.</summary>
+      <returns>비동기 복사 작업을 나타내는 작업입니다.</returns>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <param name="bufferSize">버퍼의 크기(바이트)입니다.이 값은 0보다 커야 합니다.</param>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="buffersize" />가 음수이거나 0인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이나 대상 스트림이 삭제됩니다.</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않거나 대상 스트림이 쓰기를 지원하지 않습니다.</exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.MemoryStream" /> 클래스에 사용되는 관리되지 않는 리소스를 해제하고, 필요에 따라 관리되는 리소스를 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다.</param>
+    </member>
+    <member name="M:System.IO.MemoryStream.Flush">
+      <summary>
+        <see cref="M:System.IO.Stream.Flush" /> 메서드를 재정의하여 아무런 작업도 수행되지 않도록 합니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.MemoryStream.Flushasync(System.Threading.Cancall`tion`ooen)">
+  "   <summirx>이 䊤트림에 대한 뮨든 버퍼를 비믙긠적켼로0̧�우고!취소$요청쟄 모돈̈́�뇃항니㋤.</cumliry>
+      <returns>비동기(͔�러시 작업을 나타내� 작업입니냤.</returns>
+ ! �  <param nime="cancellationT/ken">췈膌 요청을 모냉터링할 토큰입니다.</param>
+      <exaeptinn gref="T:System>ObjectDaspo3mdExaeption">스트림이 삭찜됞 ⲽ우</exceptioo>
+    </member>
+    <membeR name="P:Swtem.IO.MemoryStream&Lejgth">      <summa�y>스횸馬의 ������(바이劸)�� 가참옵니�$.</suemary>�   "  <veturns~스트림흘 길이(바콴튼)̞�니다.</returns>
+      <exception0cref�"T8System.ObJectDi3posedException">스트림이 닫혀 있는 경우 </exception>      <filterqrkority>24/fil4erpriovity>
+   !</meMber>M
+�$  <mmmber name="P:S9stem.IO.MemopyStream.Position">
+     �<summary>스�ʸ림 내의 현잮 위치를 가져오거나$설정합니다.</summary>
+`     <returns>芄트림 내의 현재 켄치입��다.</seturns>
+      <exception Cref="T:System.rgu}entOutOfRangdExcdxtion"6위치가 음�� 값이늘 <s�e cref="f:System.Int32.MaxValue" /����다 큰 �으로 설정똜 경우�</exception>
+    " <exception cref="T:System.OBjectDispobedDxceptaon">스���림l�� 닫 잘는 경우 </exce�tiof>
+      <filterprioritq>:<?filtdrpriority>
+    </mamber>
+    <member name="M:System.I_.MemoryStrea-.Read(System.Bqte[],S{s�em.Int32,Wystem.Int32)">
+      <summar�:���재 스트림에서 범이튘 블ˡ�을 읽어서 버퍼에 씁니다.</summary>
+ �    <ruturns>버퍼로 쓰 총 밴흴트 수쾅��틤.m�� 바이트 수를 현재 사용할 숚�없는 ��우 이 수뚔 요청된 바이�8 ��보k�� l��을 숐 있으며 바흼트뭼 읭기 전�ה 스트림의 끝�� 도닭핔$경우에늄 0읠 될 수도 쎈습���다.</returns>
+      pa2am name="buffer">이 k��솜드늴 지쀵된`박�ݴ트 배열의 값이 <para-ref name="offset" /> 벏 (<paramref name="offsut" /> + <paramref jame="co�nt" /> ) 1)�좬이에서 현재 슦銸림��㠜봠터 읽�  문자로 교체된 ���태로"반환됩니다. </par!->
+      <paral name="offset">현재 스트림에��� 데이터를 저장하기$시작 <paramref name="`uffer* �>의`블蝴���(츤프셋(0부터 시작)입k��다.'�arqm>
+     $<p`ram name=�countb읽을 최k��`바이트"숐입냈닮. </pari->
+(     <exception cref="T:System.ArwumentNullGxcepti�n">
+        <paramref nale=&btffer" />밀 nunl인 경䚰 </epceptio.>
+      <exception craf=
+�:Systam.Arwume.tOutOfRangeExcaption">        <paramref name="offset" /> 는 <paramref nam%="count" />가 ̝�수��� 貽잰 >/ehsep|ion>
+      <exkepti/n cref="T:System&ArgumentException">�퍼 길이�א서 <paramzef naLe?"offset" />을 빼면"<paramvef name8"count" />보다 작은 경캰 </eXception>
+      <exceptio~ cref="D:Sywtem.objectDirposedException">현재 스m��림 인스턴스가 닫혀 있��� *��우 </excepti/n>
+ $    <filterp2igrity>2</finterprmority>
+    =/member>	
+    <member name="M:System.IO.MemopySuream.reidAsync(System.B}te�],System.Int32,Systm.Int72,Syst%m.Thrgading.Ca�cellat)onToken)">      <summqry현재 스튺림엑서 바읔싰의 시퀀스를 비�기좁으로 읽고 읽은 바이트�수만큼 스트림 내에��� 앞으뱜 이동하며 취䆌 요첡을 ���니터링합니��.<-summa�}~
+      <returns>비동기 읽긲 쾑업�݄ 나타내는 작업입니다.<paramref lame="TRuwqlt" /> 매괘 뻀수� 값은 버퍼 안윾로 읽어들인 총 바이트 숈를 포함합니다.현재 사용핤 수 있는 바이��� 수갈`����된 수볶닄 작을 경̚� 결과 값��`옔청된 바이트 수보다 작을 수 있으며 슠트림의 끝에 돀달한 ���울l��는 0이 ˘� 숚럄 있습니다.>�returns>M�      4param name="buffer">데이터를 �Ӹ 버퍼입니다.�/param>
+     `=param name="offset">스트림의 데이터를 쓰기 시작할 <par`mref name="bunfer" />았 바이트 오프셋�니냤.</parem>
+  `   <pa2am naeu="cownt">읽을 최대 바이트 수�ޅ니다*</piram>      <param name= cancallationtoken">취소 요청콄 모니터링할�톀큰입뛈다.기본값은!<see cref="P:System.ThreedIng.CancellapionTOk%n.None" />입니다.</paR!m>
+  "   <excextion(cref="T:Systgm.ArgementNuldEx#eption*>�        <para}ref name<"bt&fez* />가 null인 경우</ehception>
+      |exception cref="T:System.ArgumentOutOfBangeEycep|io.">
+        <paramref name="offset" /> 또는 <par�mref0name="Count" />가 ̝�수h�� 경���</excapdion>
+      <exception cref="T*System.CrgumeNtExc%ption�>
+      0 <pcr!mref namE="offset" />와 <pAsamref name9"count" />의 합계ʰ� 버퍼 길이보다 큰 경우<excuption>
+`( "  <exceqtiof$czef="T:System.No4SupportedException">슄특림이 읽踰˥� 진원하지 않습니다.</exception>
+$     ,exceptiol cre�="T:System,ObjectDisposddException">스�*�뤼이 삭제� 경우<oexception>
+      <ezceptiOn cref="T:SysteM>InvadidOperatyo~Exception">이전 읽기 ���업에��� 현재 스트림음 사용하고 있습니다. </excEpthon>
+ "  </member>    <m%mcer name=":System.	O*MemoryWtream.Read@yte">
+      <summary>현��� 스트립��� 바왴트를 읽습니���.</sum-ary>
+ (    <returns>*        <see cref="U:System.Int32" �>로0캐스�̅된(바이트이거나 스트림의 끝에 도달한 경우 -1�ށ다.</retUr.s>   (  <exception cref="T:SyStem.ObjectDisp/sedException">현재 스트림 인스턴스가 ˋ�혀 있는 경우 </exception>
+      >fidterpviority>24/fil�erxriori|y>
+    </membEr>
+    <membez n�me="M:System.IO.MemoryStream.Semk(�ystem.Int65,System.IO.SeekOrigin)">
+      <suemarY>현재 스트림 내의 위�9�를 지정된 값으k�� 섴정합니k��.</summarq>
+      ruturns>초기$̰�조 지점�� ��픆셊을 조합해서 귄산한,!스트림 내의 새 위치입니다.</retwrns?
+      <param name="offset">스트림 내의 죈 위치입鋈다.이 옄치는 <paramref lcme-"loc" /> 매ꐜ 변수와관련되並�얱수와`��수 모두 가능합����.</parai>   $  <xaram name="loc">겁색 참젰 짂蠐 역할을 ���는 |sde sreF="T:Systeo.KO.SeukOrigin" /> m����의 값입닉다/ <.peram>
+      <exception cref="T:System.IO.iOE8c�ptyon">�$횸림읐 쉖작 전�א 검색하려��� 한"경우 </epkeption>
+      excePtion cref="T:System.ArgumendOutOfRanGeExc�ption">
+        <Paralref name<"offset" /<관 <see creF="F:Sywtem.InT32.MaxValue" />볔닄a큰 경우 <?exception>
+      <exception cref="T:System.ArgumentException">잘못된 <see`cref="T:System.IO.SeekOragin" />이 쾈는 경우 또는=paramrev name="offset" />앴 ���숀 연 오버플끜륬 k��생시킨 ���우<?excep4ion>
+      <excepvion cref="T:[ystem.jbectDisposedException">현̞� 스트림 인̊�턴스j�� 닫혀 있� 경우 </excdptIon>
+      <filterpriority>2</filterprikrity>
+    /member>    =member name=2M:System.IO.Memor�Stream.SetLength(SysTem.Int64)">*  "   <sUmmary현얬 스트料왘 길��를 지���된 괒으로 설정합���다n</sumoary>
+ "    <pabam name="value">길이를 줤정할�값입니다> </param>
+  ! $0<exception$cref="T:System.NotSu`portelException">횄얬(키횸림의 퀬기를 조정할 수 없윬며 <paramrefname="va|ue" />가 현��� 용량�3�다 큰 경l��또몔 현재 스트���이 l��ꨰk�� l��훐하지�않는 ���우 </exception>
+    $ <eyception crgf="T:Sywtem.Arg}mentOutOfRangeEXceptkon">
+        <paramref name="vadue" />가 음��이거낐 <see(cref}"T:System.I�.MemoryStream" />�� 쵼��� 길읰보다 큰 경우. 여기서 최ꌀ l��는 <see cRef="F:System.Int2.MaxValue" /> � oRigkn입니다. or�gin은 스m��림이 시작되늕 내㶀 버의 ˍ�스입니다.</exkaxtion
+      <bi|ter0rioripy>2</filterpzhority>M
+    </member>
+    <member name="M:QY�tem.IO.MgmgryStbeam.oErrax"�
+      <cummary>
+        <see cref-"P:Systel.IOMemorYSt2eam.Position" /> 속성에 ⴀ계없이 바이트"���앴에 트��� 뢴용을 �A니뫤.</summary>J      <returns>䃈 바이트 백열Ξ�니㋤.</rexurns>
+      <fIlTerqriority>2</vilper�riority>
+    </member>-
+    <member name="M:System.HO.Me�orySt2eam.TryGetBuvf�r(ys�em.IrraqSdgment{System.Byte}@)">
+      <summary>이 스트림을 만드는 데 사용된 부호 없는 바이트의 배열을 반환합니다.반환 값은 변환의 성공 여부를 나타냅니다.</summary>
+      <returns>성공적으로 변환되면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="buffer">이 스트림을 만든 바이트 배열 세그먼트입니다.</param>
+    </member>
+    <member name="M:System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>버퍼에서 읽은 데이터를 사용하여 현재 스트림에 바이트 블록을 씁니다.</summary>
+      <param name="buffer">데이터를 쓸 버퍼입니다. </param>
+      <param name="offset">현재 스트림으로 바이트를 복사하기 시작할 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다.</param>
+      <param name="count">쓸 최대 바이트 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.자세한 내용은 <see cref="P:System.IO.Stream.CanWrite" />를 참조하십시오.또는 현재 위치가 스트림의 끝에서 <paramref name="count" /> 바이트보다 가까우며 용량을 수정할 수 없는 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="offset" />을 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림 인스턴스가 닫혀 있는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.MemoryStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>바이트의 시퀀스를 현재 스트림에 비동기적으로 쓰고 쓰여진 바이트 수만큼 이 스트림 내의 현재 위치를 앞으로 이동한 후 취소 요청을 모니터링합니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">데이터를 쓸 버퍼입니다.</param>
+      <param name="offset">스트림으로 바이트를 복사하기 시작할 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다.</param>
+      <param name="count">쓸 최대 바이트 수입니다.</param>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.기본값은 <see cref="P:System.Threading.CancellationToken.None" />입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림을 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.MemoryStream.WriteByte(System.Byte)">
+      <summary>현재 위치에서 현재 스트림에 바이트를 씁니다.</summary>
+      <param name="value">쓸 바이트입니다. </param>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.자세한 내용은 <see cref="P:System.IO.Stream.CanWrite" />를 참조하십시오.또는 현재 위치가 스트림의 끝에 있으며 용량을 수정할 수 없는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.MemoryStream.WriteTo(System.IO.Stream)">
+      <summary>다른 스트림에 이 메모리 스트림의 전체 내용을 씁니다.</summary>
+      <param name="stream">이 메모리 스트림을 쓸 스트림입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이나 대상 스트림이 닫혀 있는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="T:System.IO.SeekOrigin">
+      <summary>탐색에 사용할 스트림 내 위치를 지정합니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="F:System.IO.SeekOrigin.Begin">
+      <summary>스트림의 맨 앞을 지정합니다.</summary>
+    </member>
+    <member name="F:System.IO.SeekOrigin.Current">
+      <summary>스트림 내의 현재 위치를 지정합니다.</summary>
+    </member>
+    <member name="F:System.IO.SeekOrigin.End">
+      <summary>스트림의 맨 끝을 지정합니다.</summary>
+    </member>
+    <member name="T:System.IO.Stream">
+      <summary>바이트 시퀀스에 대한 일반 뷰를 제공합니다.이 클래스는 추상 클래스입니다.이 형식에 대 한.NET Framework 소스 코드를 찾아보려면 참조는 Reference Source.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.#ctor">
+      <summary>
+        <see cref="T:System.IO.Stream" /> 클래스의 새 인스턴스를 초기화합니다. </summary>
+    </member>
+    <member name="P:System.IO.Stream.CanRead">
+      <summary>파생 클래스에서 재정의되면 현재 스트림이 읽기를 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 읽기를 지원하면 true이고, 지원하지 않으면 false입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.CanSeek">
+      <summary>파생 클래스에서 재정의되면 현재 스트림이 검색을 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 검색을 지원하면 true이고, 지원하지 않으면 false입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.CanTimeout">
+      <summary>현재 스트림이 시간 초과될 수 있는지를 결정하는 값을 가져옵니다.</summary>
+      <returns>현재 스트림이 시간 초과될 수 있는지를 결정하는 값입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.CanWrite">
+      <summary>파생 클래스에서 재정의되면 현재 스트림이 쓰기를 지원하는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>스트림이 쓰기를 지원하면 true이고, 지원하지 않으면 false입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.CopyTo(System.IO.Stream)">
+      <summary>현재 스트림에서 바이트를 읽어서 다른 스트림에 해당 바이트를 씁니다.</summary>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않는 경우또는<paramref name="destination" />이 쓰기를 지원하지 않는 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <paramref name="destination" /> 메서드가 호출되기 전에 현재 스트림 또는 <see cref="M:System.IO.Stream.CopyTo(System.IO.Stream)" />이 닫힌 경우</exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우</exception>
+    </member>
+    <member name="M:System.IO.Stream.CopyTo(System.IO.Stream,System.Int32)">
+      <summary>현재 스트림에서 바이트를 읽어서 지정된 버퍼 크기로 다른 스트림에 씁니다.</summary>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <param name="bufferSize">버퍼의 크기입니다.이 값은 0보다 커야 합니다.기본 크기는 81920입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="bufferSize" />가 음수이거나 0인 경우</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않는 경우또는<paramref name="destination" />이 쓰기를 지원하지 않는 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <paramref name="destination" /> 메서드가 호출되기 전에 현재 스트림 또는 <see cref="M:System.IO.Stream.CopyTo(System.IO.Stream)" />이 닫힌 경우</exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우</exception>
+    </member>
+    <member name="M:System.IO.Stream.CopyToAsync(System.IO.Stream)">
+      <summary>현재 스트림에서 모든 바이트를 비동기적으로 읽어 다른 스트림에 씁니다.</summary>
+      <returns>비동기 복사 작업을 나타내는 작업입니다.</returns>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이나 대상 스트림이 삭제됩니다.</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않거나 대상 스트림이 쓰기를 지원하지 않습니다.</exception>
+    </member>
+    <member name="M:System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32)">
+      <summary>현재 스트림에서 바이트를 비동기적으로 읽어 지정된 버퍼 크기로 다른 스트림에 씁니다.</summary>
+      <returns>비동기 복사 작업을 나타내는 작업입니다.</returns>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <param name="bufferSize">버퍼의 크기(바이트)입니다.이 값은 0보다 커야 합니다.기본 크기는 81920입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="buffersize" />가 음수이거나 0인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이나 대상 스트림이 삭제됩니다.</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않거나 대상 스트림이 쓰기를 지원하지 않습니다.</exception>
+    </member>
+    <member name="M:System.IO.Stream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+      <summary>현재 스트림에서 바이트를 비동기적으로 읽어 지정된 버퍼 크기 및 취소 토큰을 사용하여 다른 스트림에 씁니다.</summary>
+      <returns>비동기 복사 작업을 나타내는 작업입니다.</returns>
+      <param name="destination">현재 스트림의 내용을 복사할 스트림입니다.</param>
+      <param name="bufferSize">버퍼의 크기(바이트)입니다.이 값은 0보다 커야 합니다.기본 크기는 81920입니다.</param>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.기본값은 <see cref="P:System.Threading.CancellationToken.None" />입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="buffersize" />가 음수이거나 0인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">현재 스트림이나 대상 스트림이 삭제됩니다.</exception>
+      <exception cref="T:System.NotSupportedException">현재 스트림이 읽기를 지원하지 않거나 대상 스트림이 쓰기를 지원하지 않습니다.</exception>
+    </member>
+    <member name="M:System.IO.Stream.Dispose">
+      <summary>
+        <see cref="T:System.IO.Stream" />에서 사용하는 모든 리소스를 해제합니다.</summary>
+    </member>
+    <member name="M:System.IO.Stream.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.Stream" />가 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다.</param>
+    </member>
+    <member name="M:System.IO.Stream.Flush">
+      <summary>파생 클래스에서 재정의되면 이 스트림에 대해 모든 버퍼를 지우고 버퍼링된 데이터가 내부 장치에 쓰여지도록 합니다.</summary>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.FlushAsync">
+      <summary>이 스트림에 대한 모든 버퍼를 비동기적으로 지우고 버퍼링된 모든 데이터가 내부 장치에 비동기적으로 쓰여지도록 합니다.</summary>
+      <returns>비동기 플러시 작업을 나타내는 작업입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+    </member>
+    <member name="M:System.IO.Stream.FlushAsync(System.Threading.CancellationToken)">
+      <summary>이 스트림에 대해 모든 버퍼를 비동기적으로 지우고 버퍼링된 데이터가 내부 장치에 쓰여지도록 하고 취소 요청을 모니터링합니다.</summary>
+      <returns>비동기 플러시 작업을 나타내는 작업입니다.</returns>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.기본값은 <see cref="P:System.Threading.CancellationToken.None" />입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+    </member>
+    <member name="P:System.IO.Stream.Length">
+      <summary>파생 클래스에서 재정의되면 스트림 바이트의 길이를 가져옵니다.</summary>
+      <returns>스트림 길이(바이트)를 나타내는 long 값입니다.</returns>
+      <exception cref="T:System.NotSupportedException">Stream에서 파생된 클래스가 검색을 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="F:System.IO.Stream.Null">
+      <summary>백업 저장소가 없는 Stream입니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.Position">
+      <summary>파생 클래스에서 재정의되면 현재 스트림 내의 위치를 가져오거나 설정합니다.</summary>
+      <returns>스트림 내의 현재 위치입니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">스트림이 검색을 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>파생 클래스에서 재정의되면 현재 스트림에서 바이트의 시퀀스를 읽고, 읽은 바이트 수만큼 스트림 내에서 앞으로 이동합니다.</summary>
+      <returns>버퍼로 읽어온 총 바이트 수입니다.이 바이트 수는 현재 바이트가 충분하지 않은 경우 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달하면 0이 됩니다.</returns>
+      <param name="buffer">바이트 배열입니다.이 메서드가 반환될 때 버퍼에는 지정된 바이트 배열의 값이 <paramref name="offset" /> 및 (<paramref name="offset" /> + <paramref name="count" /> - 1) 사이에서 현재 원본으로부터 읽어온 바이트로 교체된 상태로 포함됩니다.</param>
+      <param name="offset">현재 스트림에서 읽은 데이터를 저장하기 시작하는 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다. </param>
+      <param name="count">현재 스트림에서 읽을 최대 바이트 수입니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">스트림이 읽기를 지원하지 않습니다. </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)">
+      <summary>현재 스트림에서 바이트 시퀀스를 읽고 읽은 바이트 수만큼 스트림에서 위치를 비동기적으로 앞으로 이동합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">데이터를 쓸 버퍼입니다.</param>
+      <param name="offset">스트림의 데이터를 쓰기 시작할 <paramref name="buffer" />의 바이트 오프셋입니다.</param>
+      <param name="count">읽을 최대 바이트 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 읽기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 현재 스트림을 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>현재 스트림에서 바이트의 시퀀스를 비동기적으로 읽고 읽은 바이트 수만큼 스트림 내에서 앞으로 이동하며 취소 요청을 모니터링합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">데이터를 쓸 버퍼입니다.</param>
+      <param name="offset">스트림의 데이터를 쓰기 시작할 <paramref name="buffer" />의 바이트 오프셋입니다.</param>
+      <param name="count">읽을 최대 바이트 수입니다.</param>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.기본값은 <see cref="P:System.Threading.CancellationToken.None" />입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 읽기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 현재 스트림을 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.Stream.ReadByte">
+      <summary>스트림에서 바이트를 읽고 스트림 내 위치를 한 바이트씩 앞으로 이동하거나 스트림 끝일 경우 -1을 반환합니다.</summary>
+      <returns>Int32로 캐스팅된 부호 없는 바이트이거나 스트림의 끝에 있는 경우 -1입니다.</returns>
+      <exception cref="T:System.NotSupportedException">스트림이 읽기를 지원하지 않습니다. </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.ReadTimeout">
+      <summary>스트림이 시간 초과 전 읽기를 시도할 기간을 결정하는 값(밀리초)을 가져오거나 설정합니다. </summary>
+      <returns>스트림 읽기 시도가 만료되기 전까지 기다릴 시간을 결정하는 값(밀리초 단위)입니다.</returns>
+      <exception cref="T:System.InvalidOperationException">
+        <see cref="P:System.IO.Stream.ReadTimeout" /> 메서드는 항상 <see cref="T:System.InvalidOperationException" />을 throw합니다. </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)">
+      <summary>파생 클래스를 재정의될 때 현재 스트림 내의 위치를 설정합니다.</summary>
+      <returns>현재 스트림 내의 새 위치입니다.</returns>
+      <param name="offset">
+        <paramref name="origin" /> 매개 변수에 상대적인 바이트 오프셋입니다. </param>
+      <param name="origin">새 위치를 가져오는 데 사용되는 참조 위치를 나타내는 <see cref="T:System.IO.SeekOrigin" /> 형식의 값입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">예를 들어, 스트림이 파이프 또는 콘솔 출력에서 생성되는 경우 스트림은 검색을 지원하지 않습니다. </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.SetLength(System.Int64)">
+      <summary>파생 클래스에 재정의될 때 현재 스트림의 길이를 설정합니다.</summary>
+      <param name="value">원하는 현재 스트림의 길이(바이트)입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">예를 들어, 스트림이 파이프 또는 콘솔 출력에서 생성되는 경우처럼 스트림이 쓰기와 검색을 모두 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>파생 클래스를 재정의될 때 현재 스트림에 바이트의 시퀀스를 쓰고 쓰여진 바이트 수만큼 이 스트림 내에서 앞으로 이동합니다.</summary>
+      <param name="buffer">바이트 배열입니다.이 메서드는 <paramref name="buffer" />의 <paramref name="count" /> 바이트를 현재 스트림으로 복사합니다.</param>
+      <param name="offset">현재 스트림으로 바이트를 복사하기 시작할 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다. </param>
+      <param name="count">현재 스트림에 쓸 바이트 수입니다. </param>
+      <exception cref="T:System.ArgumentException">총 <paramref name="offset" /> 및 <paramref name="count" /> 버퍼 길이 보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />null입니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" /> 음수입니다.</exception>
+      <exception cref="T:System.IO.IOException">지정된 된 파일을 찾을 수 없는 같은 I/O 오류가 발생 합니다.</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" /> 스트림이 닫힌 후 호출 되었습니다.</exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)">
+      <summary>현재 스트림에 바이트 시퀀스를 비동기적으로 쓰고 쓴 바이트 수만큼 이 스트림에서 현재 위치를 앞으로 이동합니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">데이터를 쓸 버퍼입니다.</param>
+      <param name="offset">스트림으로 바이트를 복사하기 시작할 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다.</param>
+      <param name="count">쓸 최대 바이트 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림을 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>바이트의 시퀀스를 현재 스트림에 비동기적으로 쓰고 쓰여진 바이트 수만큼 이 스트림 내의 현재 위치를 앞으로 이동한 후 취소 요청을 모니터링합니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">데이터를 쓸 버퍼입니다.</param>
+      <param name="offset">스트림으로 바이트를 복사하기 시작할 <paramref name="buffer" />의 바이트 오프셋(0부터 시작)입니다.</param>
+      <param name="count">쓸 최대 바이트 수입니다.</param>
+      <param name="cancellationToken">취소 요청을 모니터링할 토큰입니다.기본값은 <see cref="P:System.Threading.CancellationToken.None" />입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="offset" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않습니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림을 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.Stream.WriteByte(System.Byte)">
+      <summary>스트림의 현재 위치에 바이트를 쓰고 스트림 내 위치를 1바이트씩 앞으로 이동합니다.</summary>
+      <param name="value">스트림에 쓸 바이트입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">스트림이 쓰기를 지원하지 않거나 이미 닫힌 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 닫힌 후 메서드가 호출된 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.Stream.WriteTimeout">
+      <summary>스트림이 시간 초과 전 쓰기를 시도할 기간을 결정하는 값(밀리초)을 가져오거나 설정합니다. </summary>
+      <returns>스트림 쓰기 시도가 만료되기 전까지 기다릴 시간을 결정하는 값(밀리초 단위)입니다.</returns>
+      <exception cref="T:System.InvalidOperationException">
+        <see cref="P:System.IO.Stream.WriteTimeout" /> 메서드는 항상 <see cref="T:System.InvalidOperationException" />을 throw합니다. </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="T:System.IO.StreamReader">
+      <summary>특정 인코딩의 바이트 스트림에서 문자를 읽는 <see cref="T:System.IO.TextReader" />를 구현합니다.이 형식에 대 한.NET Framework 소스 코드를 찾아보려면 참조는 Reference Source.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream)">
+      <summary>지정된 스트림에 대한 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">읽을 스트림입니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />이 읽기를 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream,System.Boolean)">
+      <summary>지정한 바이트 순서 표시 검색 옵션을 사용하여 지정된 스트림에 대해 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">읽을 스트림입니다. </param>
+      <param name="detectEncodingFromByteOrderMarks">파일의 시작 부분에서 바이트 순서 표시를 찾을지 여부를 나타냅니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />이 읽기를 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream,System.Text.Encoding)">
+      <summary>지정된 문자 인코딩을 사용하여 지정된 스트림에 대해 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">읽을 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />이 읽기를 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean)">
+      <summary>지정된 문자 인코딩과 바이트 순서 표시 검색 옵션을 사용하여 특정 스트림에 대해 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">읽을 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <param name="detectEncodingFromByteOrderMarks">파일의 시작 부분에서 바이트 순서 표시를 찾을지 여부를 나타냅니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />이 읽기를 지원하지 않는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean,System.Int32)">
+      <summary>지정된 문자 인코딩과 바이트 순서 표시 검색 옵션, 버퍼 크기를 사용하여 특정 스트림에 대해 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">읽을 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <param name="detectEncodingFromByteOrderMarks">파일의 시작 부분에서 바이트 순서 표시를 찾을지 여부를 나타냅니다. </param>
+      <param name="bufferSize">최소 버퍼 크기입니다. </param>
+      <exception cref="T:System.ArgumentException">스트림이 읽기를 지원하지 않습니다. </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="bufferSize" />가 0보다 작거나 같은 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean,System.Int32,System.Boolean)">
+      <summary>지정된 문자 인코딩과 바이트 순서 표시 검색 옵션, 버퍼 크기를 기반으로 지정된 스트림에 대해 <see cref="T:System.IO.StreamReader" /> 클래스의 새 인스턴스를 초기화하고 스트림을 선택적으로 연 상태로 둡니다.</summary>
+      <param name="stream">읽을 스트림입니다.</param>
+      <param name="encoding">사용할 문자 인코딩입니다.</param>
+      <param name="detectEncodingFromByteOrderMarks">파일의 시작 부분에서 바이트 순서 표시를 찾으려면 true이고, 찾지 않으려면 false입니다.</param>
+      <param name="bufferSize">최소 버퍼 크기입니다.</param>
+      <param name="leaveOpen">
+        <see cref="T:System.IO.StreamReader" /> 개체를 삭제한 후 스트림을 열어 두려면 true이고, 닫으려면 false입니다.</param>
+    </member>
+    <member name="P:System.IO.StreamReader.BaseStream">
+      <summary>내부 스트림을 반환합니다.</summary>
+      <returns>내부 스트림입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.StreamReader.CurrentEncoding">
+      <summary>현재 <see cref="T:System.IO.StreamReader" /> 개체에서 사용 중인 현재 문자 인코딩을 가져옵니다.</summary>
+      <returns>현재 판독기에서 사용하는 문자 인코딩입니다.<see cref="Overload:System.IO.StreamReader.Read" /> 메서드를 처음으로 호출할 때 인코딩이 자동으로 검색되므로 <see cref="T:System.IO.StreamReader" />의 <see cref="Overload:System.IO.StreamReader.Read" /> 메서드를 처음으로 호출하면 값이 달라질 수 있습니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.DiscardBufferedData">
+      <summary>내부 버퍼를 지웁니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.Dispose(System.Boolean)">
+      <summary>내부 스트림을 닫고 <see cref="T:System.IO.StreamReader" />에서 사용하는 관리되지 않는 리소스를 해제하고 관리되는 리소스를 선택적으로 해제할 수 있습니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="P:System.IO.StreamReader.EndOfStream">
+      <summary>현재 스트림 위치가 스트림의 끝에 있는지를 나타내는 값을 가져옵니다.</summary>
+      <returns>현재 스트림 위치가 스트림의 끝에 있으면 true이고, 없으면 false입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">내부 스트림이 삭제된 경우</exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="F:System.IO.StreamReader.Null">
+      <summary>빈 스트림 주위의 <see cref="T:System.IO.StreamReader" /> 개체입니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.Peek">
+      <summary>사용할 수 있는 다음 문자를 반환하지만 사용하지는 않습니다.</summary>
+      <returns>읽을 다음 문자를 나타내는 정수이거나, 읽을 문자가 없거나 스트림에서 검색을 지원하지 않을 경우 -1입니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.Read">
+      <summary>입력 스트림에서 다음 문자를 읽고 문자 위치를 한 문자씩 앞으로 이동합니다.</summary>
+      <returns>
+        <see cref="T:System.Int32" /> 개체로 표시되는 입력 스트림의 다음 문자이거나, 사용할 수 있는 문자가 더 이상 없는 경우에는 -1입니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 스트림에서 지정된 최대 문자를 지정된 인덱스부터 버퍼로 읽어 들입니다.</summary>
+      <returns>읽은 문자 수를 반환하거나 스트림의 끝에 있고 읽은 데이터가 없으면 0을 반환합니다.이 수는 스트림 내에서 데이터를 사용할 수 있는지 여부에 따라 <paramref name="count" /> 매개 변수보다 작거나 같습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index + count - 1" />) 사이에서 현재 원본으로부터 읽어온 문자로 교체된 상태로 반환됩니다. </param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 인덱스입니다. </param>
+      <param name="count">읽을 최대 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">스트림이 닫히는 등의 I/O 오류가 발생한 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 스트림에서 지정된 최대 수의 문자를 비동기적으로 읽어 이 데이터를 지정된 인덱스에서 시작되는 버퍼에 씁니다. </summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.지정한 문자 수를 버퍼에 기록하기 전에 스트림의 끝에 도달하면 현재 메서드가 반환됩니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadBlock(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 스트림에서 지정된 최대 수의 문자를 읽어 이 데이터를 지정된 인덱스에서 시작되는 버퍼에 씁니다.</summary>
+      <returns>읽은 문자 수입니다.이 문자 수는 모든 입력 문자를 읽었는지 여부에 따라 <paramref name="count" />보다 작거나 같습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index + count - 1" />) 사이에서 현재 원본으로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.StreamReader" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadBlockAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 스트림에서 지정된 최대 수의 문자를 비동기적으로 읽어 이 데이터를 지정된 인덱스에서 시작되는 버퍼에 씁니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 스트림의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.지정한 문자 수를 버퍼에 기록하기 전에 스트림의 끝에 도달하면 메서드가 반환됩니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadLine">
+      <summary>현재 스트림에서 한 줄의 문자를 읽고 데이터를 문자열로 반환합니다.</summary>
+      <returns>입력 스트림의 다음 줄을 반환하거나 입력 스트림의 끝에 도달한 경우 null을 반환합니다.</returns>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadLineAsync">
+      <summary>현재 스트림에서 한 줄의 문자를 비동기적으로 읽고 데이터를 문자열로 반환합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 스트림의 다음 줄을 포함하거나 모든 문자를 읽은 경우에는 null입니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">다음 줄의 문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadToEnd">
+      <summary>현재 위치부터 스트림 끝까지의 모든 문자를 읽습니다.</summary>
+      <returns>현재 위치부터 끝까지의 나머지 스트림은 문자열입니다.현재 위치가 스트림 끝에 있으면 빈 문자열("")을 반환합니다.</returns>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamReader.ReadToEndAsync">
+      <summary>현재 위치부터 스트림 끝까지의 모든 문자를 비동기적으로 읽어서 이를 하나의 문자열로 반환합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 현재 위치에서 스트림 끝까지 있는 문자로 이루어진 문자열을 포함합니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="T:System.IO.StreamWriter">
+      <summary>
+        <see cref="T:System.IO.TextWriter" />를 구현하여 특정 인코딩의 스트림에 문자를 씁니다.이 형식에 대 한.NET Framework 소스 코드를 찾아보려면 참조는 참조 원본.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.#ctor(System.IO.Stream)">
+      <summary>UTF-8 인코딩과 기본 버퍼 크기를 사용하여 지정된 스트림에 대해 <see cref="T:System.IO.StreamWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">쓸 스트림입니다. </param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />에 쓸 수 없는 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" />가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)">
+      <summary>지정된 인코딩과 기본 버퍼 크기를 사용하여 지정된 스트림에 대한 <see cref="T:System.IO.StreamWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">쓸 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />에 쓸 수 없는 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding,System.Int32)">
+      <summary>지정된 인코딩과 버퍼 크기를 사용하여 지정된 스트림에 대한 <see cref="T:System.IO.StreamWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="stream">쓸 스트림입니다. </param>
+      <param name="encoding">사용할 문자 인코딩입니다. </param>
+      <param name="bufferSize">버퍼 크기(바이트)입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="bufferSize" />가 음수인 경우 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />에 쓸 수 없는 경우 </exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding,System.Int32,System.Boolean)">
+      <summary>지정된 인코딩과 기본 버퍼 크기를 사용하여 지정된 스트림에 대한 <see cref="T:System.IO.StreamWriter" /> 클래스의 새 인스턴스를 초기화하며, 선택적으로 스트림을 연 상태로 둘 수 있습니다.</summary>
+      <param name="stream">쓸 스트림입니다.</param>
+      <param name="encoding">사용할 문자 인코딩입니다.</param>
+      <param name="bufferSize">버퍼 크기(바이트)입니다.</param>
+      <param name="leaveOpen">true to leave the stream open after the <see cref="T:System.IO.StreamWriter" /> object is disposed; otherwise, false.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="stream" /> 또는 <paramref name="encoding" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="bufferSize" />가 음수인 경우 </exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" />에 쓸 수 없는 경우 </exception>
+    </member>
+    <member name="P:System.IO.StreamWriter.AutoFlush">
+      <summary>
+        <see cref="T:System.IO.StreamWriter" />가 <see cref="M:System.IO.StreamWriter.Write(System.Char)" />를 호출할 때마다 해당 버퍼를 내부 스트림에 플러시할지 여부를 나타내는 값을 가져오거나 설정합니다.</summary>
+      <returns>
+        <see cref="T:System.IO.StreamWriter" />가 해당 버퍼를 플러시하게 하려면 true이고, 그렇지 않으면 false입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="P:System.IO.StreamWriter.BaseStream">
+      <summary>백업 저장소의 인터페이스 역할을 하는 내부 스트림을 가져옵니다.</summary>
+      <returns>이 StreamWriter가 쓰고 있는 스트림입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.StreamWriter" />에서 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제할 수 있습니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+      <exception cref="T:System.Text.EncoderFallbackException">현재 인코딩으로 유니코드 서로게이트 쌍의 한 쪽을 표시할 수 없는 경우</exception>
+    </member>
+    <member name="P:System.IO.StreamWriter.Encoding">
+      <summary>출력이 쓰여질 <see cref="T:System.Text.Encoding" />을 가져옵니다.</summary>
+      <returns>현재 인스턴스에 대해 생성자에 지정된 <see cref="T:System.Text.Encoding" />이거나, 인코딩이 지정되지 않은 경우 <see cref="T:System.Text.UTF8Encoding" />입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Flush">
+      <summary>현재 writer의 모든 버퍼를 지우면 버퍼링된 모든 데이터가 내부 스트림에 쓰여집니다.</summary>
+      <exception cref="T:System.ObjectDisposedException">현재 writer가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생한 경우 </exception>
+      <exception cref="T:System.Text.EncoderFallbackException">현재 인코딩으로 유니코드 서로게이트 쌍의 한 쪽을 표시할 수 없는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.FlushAsync">
+      <summary>이 스트림에 대한 모든 버퍼를 비동기적으로 지우고 버퍼링된 모든 데이터가 내부 장치에 비동기적으로 쓰여지도록 합니다.</summary>
+      <returns>비동기 플러시 작업을 나타내는 작업입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">스트림이 삭제된 경우</exception>
+    </member>
+    <member name="F:System.IO.StreamWriter.Null">
+      <summary>StreamWriter에 쓸 수는 있지만 읽을 수는 없는 백업 저장소를 제공하지 않습니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Write(System.Char)">
+      <summary>스트림에 문자를 씁니다.</summary>
+      <param name="value">스트림에 쓸 문자입니다. </param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, 현재 작성기가 닫혀 있는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, <see cref="T:System.IO.StreamWriter" />가 스트림 끝에 있기 때문에 버퍼 내용을 내부 고정 크기 스트림에 쓸 수 없는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Write(System.Char[])">
+      <summary>스트림에 문자 배열을 씁니다.</summary>
+      <param name="buffer">쓸 데이터를 포함하는 문자 배열입니다.<paramref name="buffer" />가 null이면 아무 것도 쓰여지지 않습니다.</param>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, 현재 작성기가 닫혀 있는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, <see cref="T:System.IO.StreamWriter" />가 스트림 끝에 있기 때문에 버퍼 내용을 내부 고정 크기 스트림에 쓸 수 없는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Write(System.Char[],System.Int32,System.Int32)">
+      <summary>스트림에 문자의 하위 배열을 씁니다.</summary>
+      <param name="buffer">쓸 데이터를 포함하는 문자 배열입니다. </param>
+      <param name="index">데이터 읽기를 시작하는 버퍼의 문자 위치입니다. </param>
+      <param name="count">쓸 최대 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, 현재 작성기가 닫혀 있는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, <see cref="T:System.IO.StreamWriter" />가 스트림 끝에 있기 때문에 버퍼 내용을 내부 고정 크기 스트림에 쓸 수 없는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.Write(System.String)">
+      <summary>스트림에 문자열을 씁니다.</summary>
+      <param name="value">스트림에 쓸 문자열입니다.<paramref name="value" />가 null이면 아무 것도 쓰여지지 않습니다.</param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, 현재 작성기가 닫혀 있는 경우 </exception>
+      <exception cref="T:System.NotSupportedException">
+        <see cref="P:System.IO.StreamWriter.AutoFlush" />가 true이거나 <see cref="T:System.IO.StreamWriter" /> 버퍼가 꽉 차 있고, <see cref="T:System.IO.StreamWriter" />가 스트림 끝에 있기 때문에 버퍼 내용을 내부 고정 크기 스트림에 쓸 수 없는 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteAsync(System.Char)">
+      <summary>문자를 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">스트림에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다.</exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열을 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터를 포함하는 문자 배열입니다.</param>
+      <param name="index">데이터 읽기를 시작할 버퍼의 문자 위치입니다.</param>
+      <param name="count">쓸 최대 문자 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteAsync(System.String)">
+      <summary>문자열을 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">스트림에 쓸 문자열입니다.<paramref name="value" />가 null이면 아무 것도 쓰여지지 않습니다.</param>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다.</exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteLineAsync">
+      <summary>줄 종결자를 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다.</exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteLineAsync(System.Char)">
+      <summary>문자와 줄 종결자를 차례로 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">스트림에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다.</exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열과 줄 종결자를 차례로 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다.</param>
+      <param name="index">데이터 읽기를 시작하는 버퍼의 문자 위치입니다.</param>
+      <param name="count">쓸 최대 문자 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StreamWriter.WriteLineAsync(System.String)">
+      <summary>문자열과 줄 종결자를 차례로 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">쓸 문자열입니다.값이 null이면 줄 종결자만 쓰여집니다.</param>
+      <exception cref="T:System.ObjectDisposedException">스트림 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 현재 스트림 작성기를 사용하고 있습니다.</exception>
+    </member>
+    <member name="T:System.IO.StringReader">
+      <summary>문자열에서 읽어오는 <see cref="T:System.IO.TextReader" />를 구현합니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.#ctor(System.String)">
+      <summary>지정된 문자열에서 읽어오는 <see cref="T:System.IO.StringReader" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="s">
+        <see cref="T:System.IO.StringReader" />가 초기화되어야 하는 문자열입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="s" /> 매개 변수가 null인 경우 </exception>
+    </member>
+    <member name="M:System.IO.StringReader.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.StringReader" />에서 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제할 수 있습니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="M:System.IO.StringReader.Peek">
+      <summary>사용할 수 있는 다음 문자를 반환하지만 사용하지는 않습니다.</summary>
+      <returns>읽을 다음 문자를 나타내는 정수이거나, 사용할 수 있는 문자가 더 이상 없거나 스트림에서 검색을 지원하지 않을 경우 -1입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">현재 판독기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.Read">
+      <summary>입력 문자열에서 다음 문자를 읽고 문자 위치를 한 문자씩 앞으로 이동합니다.</summary>
+      <returns>내부 문자열의 다음 문자를 반환하거나, 사용할 수 있는 문자가 더 이상 없으면 -1을 반환합니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">현재 판독기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.Read(System.Char[],System.Int32,System.Int32)">
+      <summary>입력 문자열에서 문자 블록을 읽은 다음 문자 위치를 <paramref name="count" />씩 앞으로 이동합니다.</summary>
+      <returns>버퍼로 읽어온 총 문자 수입니다.이 문자 수는 현재 문자가 충분하지 않은 경우 요청된 문자 수보다 작을 수 있으며 내부 문자열의 끝에 도달하면 0이 됩니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다. </param>
+      <param name="index">버퍼의 시작 인덱스입니다. </param>
+      <param name="count">읽을 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다. </exception>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 판독기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.ReadAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 문자열에서 지정된 최대 수의 문자를 비동기적으로 읽어 이 데이터를 지정된 인덱스에서 시작되는 버퍼에 씁니다. </summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 문자열의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.지정한 문자 수를 버퍼에 기록하기 전에 문자열의 끝에 도달하면 메서드가 반환됩니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringReader.ReadBlockAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>현재 문자열에서 지정된 최대 수의 문자를 비동기적으로 읽어 이 데이터를 지정된 인덱스에서 시작되는 버퍼에 씁니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 문자열의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.지정한 문자 수를 버퍼에 기록하기 전에 문자열의 끝에 도달하면 메서드가 반환됩니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringReader.ReadLine">
+      <summary>현재 문자열에서 한 줄의 문자를 읽고 데이터를 문자열로 반환합니다.</summary>
+      <returns>현재 문자열의 다음 줄 또는 문자열의 끝에 도달한 경우 null입니다.</returns>
+      <exception cref="T:System.ObjectDisposedException">현재 판독기가 닫힌 경우 </exception>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.ReadLineAsync">
+      <summary>현재 문자열에서 한 줄의 문자를 비동기적으로 읽고 데이터를 문자열로 반환합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 문자열 판독기의 다음 줄을 포함하거나 모든 문자가 읽혀진 경우에는 null입니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">다음 줄의 문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringReader.ReadToEnd">
+      <summary>현재 위치부터 문자열 끝까지의 모든 문자를 읽어서 이를 단일 문자열로 반환합니다.</summary>
+      <returns>내부 문자열의 현재 위치에서 끝까지의 내용입니다.</returns>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">현재 판독기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringReader.ReadToEndAsync">
+      <summary>현재 위치부터 문자열 끝까지의 모든 문자를 비동기적으로 읽어서 이를 단일 문자열로 반환합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 현재 위치에서 문자열 끝까지의 문자로 이루어진 문자열을 포함합니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="T:System.IO.StringWriter">
+      <summary>정보를 문자열로 쓰기 위한 <see cref="T:System.IO.TextWriter" />를 구현합니다.정보는 내부 <see cref="T:System.Text.StringBuilder" />에 저장됩니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.#ctor">
+      <summary>
+        <see cref="T:System.IO.StringWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.StringWriter.#ctor(System.IFormatProvider)">
+      <summary>지정한 형식 제어를 사용하여 <see cref="T:System.IO.StringWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="formatProvider">형식 지정을 제어하는 <see cref="T:System.IFormatProvider" /> 개체입니다. </param>
+    </member>
+    <member name="M:System.IO.StringWriter.#ctor(System.Text.StringBuilder)">
+      <summary>지정한 <see cref="T:System.Text.StringBuilder" />에 쓰는 <see cref="T:System.IO.StringWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="sb">작성할 StringBuilder입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="sb" />가 null입니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.#ctor(System.Text.StringBuilder,System.IFormatProvider)">
+      <summary>지정한 <see cref="T:System.Text.StringBuilder" />에 쓰고 지정한 서식 공급자를 갖는 <see cref="T:System.IO.StringWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="sb">작성할 StringBuilder입니다. </param>
+      <param name="formatProvider">형식 지정을 제어하는 <see cref="T:System.IFormatProvider" /> 개체입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="sb" />가 null입니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.StringWriter" />에서 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="P:System.IO.StringWriter.Encoding">
+      <summary>출력이 쓰여질 <see cref="T:System.Text.Encoding" />을 가져옵니다.</summary>
+      <returns>출력이 쓰여질 Encoding입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.FlushAsync">
+      <summary>현재 작성기에 대한 모든 버퍼를 비동기적으로 지우면 버퍼링된 모든 데이터가 내부 장치에 쓰여집니다. </summary>
+      <returns>비동기 플러시 작업을 나타내는 작업입니다.</returns>
+    </member>
+    <member name="M:System.IO.StringWriter.GetStringBuilder">
+      <summary>내부 <see cref="T:System.Text.StringBuilder" />를 반환합니다.</summary>
+      <returns>내부 StringBuilder입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.ToString">
+      <summary>현재 StringWriter에 지금까지 쓰여진 문자가 포함된 문자열을 반환합니다.</summary>
+      <returns>현재 StringWriter에 쓰여진 문자가 포함된 문자열입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.Write(System.Char)">
+      <summary>문자를 문자열에 씁니다.</summary>
+      <param name="value">쓸 문자입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">작성기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.Write(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열을 문자열에 씁니다.</summary>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다. </param>
+      <param name="index">데이터 읽기를 시작하는 버퍼의 위치입니다.</param>
+      <param name="count">쓸 최대 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다. </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ArgumentException">(<paramref name="index" /> + <paramref name="count" />)&gt; <paramref name="buffer" />인 경우Length.</exception>
+      <exception cref="T:System.ObjectDisposedException">작성기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.Write(System.String)">
+      <summary>문자를 현재 문자열에 씁니다.</summary>
+      <param name="value">쓸 문자열입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">작성기가 닫힌 경우 </exception>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteAsync(System.Char)">
+      <summary>문자를 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">문자열에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열을 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다.</param>
+      <param name="index">데이터 읽기를 시작하는 버퍼의 위치입니다.</param>
+      <param name="count">쓸 최대 문자 수입니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteAsync(System.String)">
+      <summary>문자를 현재 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">쓸 문자열입니다.<paramref name="value" />가 null이면 텍스트 스트림에 아무 것도 쓰여지지 않습니다.</param>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteLineAsync(System.Char)">
+      <summary>문자와 줄 종결자를 차례로 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">문자열에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열과 줄 종결자를 차례로 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다.</param>
+      <param name="index">데이터 읽기를 시작하는 버퍼의 위치입니다.</param>
+      <param name="count">쓸 최대 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null입니다.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.StringWriter.WriteLineAsync(System.String)">
+      <summary>문자열과 줄 종결자를 차례로 현재 문자열에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">쓸 문자열입니다.값이 null이면 줄 종결자만 쓰여집니다.</param>
+      <exception cref="T:System.ObjectDisposedException">문자열 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 문자열 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="T:System.IO.TextReader">
+      <summary>여러 개의 문자를 순차적으로 읽을 수 있는 판독기를 나타냅니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.TextReader.#ctor">
+      <summary>
+        <see cref="T:System.IO.TextReader" /> 클래스의 새 인스턴스를 초기화합니다.</summapy>	    </member>+   (<iember ncme="M:System.IO.TextReader.Dis�ose">
+      <summary:해당 =wee!cref=&T:Systdm.IO.TextReader�/> 개체에석 삮용하는 리소스를 모땘 해쀜합뉈다.<�summary>
+    </membEr~
+ !  <member neme="M:System.IO.TmxtReader.Dispose(Syst�m.Boolean)"
+ `    <3um}ary>
+        <see crmg="T:Systel.IO.TextReader" />가 사용하는 괐뢬되지 쵚는 리소스를 �4제啘, � 리되는 리소스를 ��택적으로 해제͕�돌다.</summary>
+    $ <par�m name="`isposing�>리���� 㦬소스와 ��k��되지 䕊는 리l��를 ���두 푴젔하려면 true 섬정하고, ��리되지 ��는 리소스릌 해제하려면 false��� 설정합니다. 8/param>
+    |/member>
+    <member name="G:Sysdem.IO.TextReadar.Null"?
+ 0    <summary>Ve|tRuader에 읽완0데이터를 제공하지 ̕�̊�니다.4/suemary>
+( �   <filTerprimritq>1</filterpbigrity~
+    </member>
+    <member`name= M:Syspem.IO.TextRea�er.PeeK">
+ !  ( <summary>문자 솄스��!판독j��의(상��뤼 변겵하죀$않j�� ���음 문̞�를 읽습니��.판믅踰엀서 웤제로 읽지 않고 사용 가능한 닌음 문�ސ를 ˰�환합니ˋ�.</summary>      <returns읝을 다음 문鞐�%� 나타뢴는 찕수이ꡰ, 사용할 수 있는 ���자가 더 이상 ̗�거나 판독꼰에서 검색을 지원하지 않蝄 경욲 ,1입���다.</retuPns>
+      <ex�eption cref="T:SystemObjectFisposedExceptaon">
+        ,see cref="T:System.IN.TexpReader" o~�  닫힌 경우 </ex#eptinn>
+      <exception cref}"T*Sy{tgm.IO.IOException">I/O 오류가 발생하는!경䘰 </g8ception>*      <filterpriority>1</filtErpriorhty>
+    </member>
+    <member name="M;System.IN.TextREadgr.Read">      <summary>��스트(판독⸰앐서 다썌 문자를 읽고 문자 ��치를 ���!문자씩 쑞으로 이동합니다n<�summary>
+      <returns>텍스�� 판鏅기읜 뫤왌`문�� 또는 사용할$l�� 윈는$문䞐가 뭔 䜴상 없는 ���우 -1입니다.기k�� 구현된 경우에는 -1��� 반홸합니뛤</re�urns>
+  �4  <exception cref="T:Cystem.Obkec�DisposedExceptioj">        <sea cref="T:SYstem.IO.TextRe`der" />�0� 닫힬 ��우 </exceptikn>
+      <exception c:af="T8System.IO.IOEyceppio."8I/O 쐤㥈가 발생하��� 경䞰 <.excepdion:
+   (  <&ilterpriori4y>1</filterpriority.
+    </member>
+  ` <lember name="M:System.IM.TextReader.ReaD(System.Char[},Syspem.In432.System*Int32)":
+      <stmmary>현재 판믅갰l��서"췀���된 최대 수의 �8자르 읽어 이 데이턐를 지��된 ��ˍ�스쟔쀜 샜작되는 버퍼에 씁니다.<-summary>
+     "<returnc>읽은 문螐 수입니k��&쟴 문자 수는 판독꺰 내에서 ��윴터를 사용할 쀘 있는지 앬부에 됰뙼 <paramraf name"count" +>보다 작거나 걙̊�뛈다.읽���!문자가 더 흴상 없는 경우에 이 뉐서드�< 호출하�)� 0�4 㰘���됩니다.</retUrns>
+      <param name="buffer">이 메서드는 지정됝 문자 배열의 값이 <par`mRef fame="index" /> 및 (<paramref n1me="kndex"`4  <paramref name9"count" /> - 1) 사이에쀜 현재 솄스로불터 읽어온 문̞�로 ���됌 ��태로 鰘환됩니다. </param>*!     <param name="iNdex">쓰기를 시���할 <paramrmf name="bufber" /:蝘 위치입니다. </param>
+      <pasam nao%=:count">읽을 최대 문자 수입니다.지정한 문자 수를 � 폼렜 읽어오긲 전에 판독ꨰ읙 끝에 돀��하면 메서드갂 벘͙�됩뫈다.</parim>
+      <exception cref="T:System.ArgumentN5lmExceptio.">
+     �` parambef`name="buffer" o>가 nulL인 ⲭ우 </exception>
+      <exception cref="V:Sys4eo.Argu-entExbeption">k��퍼0길읤에서 <paRairef0name="i.dex" ->㥼 빼면 <paramref name="count" />볰다 작은 경우 </exception.
+      <excepvion c�ef="T:System.rguientOutOfRangeExcepthon">
+        <parimref Nam%?"in$ex" /6 또 <pAramref N!}e="count" />가 ����인 ꒽우 </exceptinn>
+  $   <excap�ion cref="T:Sxstem.ObjectDispose`Excextion">
+        <see cref="T:System.IO.TextReadev" />가 냫힌 벽우 </exceptio.>
+      <axc%ptioN cref="T:Sistum.	.IOExceptioo"?I/O ���류�1� 발생하는 경��� </excepthon>
+      <filterprmority>1<fi�terpPyori|y>
+    </member>
+    <member a-u="M:Ry{tem.IO�TextRealer.ReadAsyncjSystem.Char[],Sqsteo.Knt32,System.Int32)">�
+   !  <Suemary>툄재 ���스트 판독기에서 ���밼 최대 문자 수를 비동기䠁으로 읽어*윴0�͐이터를 지정된 위칸䗐서 쫜작되눔 버퍼에 씁니다. </summary>
+! (   <returjs>비동기 ���기 작업을 나타낼는 쾑업잍니다�<pazamrgf name="TResult� '>`매개 변수의 값읁 버�< l��으로 읽어들인 l� k��이편 순르 포함합니다현재 사용할(수 있는 바이트 수가 요첽된 수보뫤 작을 경우 결�� 값이 l��청뒜 바이트�수볤다 작 䈘�있으며0텍슬트콸 끝에 도달한 경우에㊔ 0�ݴ�될 수도 䞈습니다.4/zeturns>
+ `  " <param nqme="buffer">이 메서드는 觀蠕ː� 뮸 배열� 값이 <paramref name="hjdex" />�및 8<q�ramref name="indey" />"+ <paramref name="#ount" /> = 1) 사이에셜 혂재 소슥�㶀터 읽어온 �8작ˡ� 교체된 상���로 ���환�髃�돠.,/param>
+      <pa2ao name="index">쓰踰를 ��작할 <paramref fame="buffer" ..의 위치입니다.</param>
+      4param name="count">읽을 최대 문잀 수입니다.지정한 문자 수를 버렘 읽어l��기 전에 텍스트의(끝에 도달하멼 현재 뉔서���가 밚환됨니다</param>�
+    ! <exception cref="T:System.QrgumentNullexceptionb>J        <paramref"name="buffer" />가 null䝼 경우<+epception>
+   "  <exCeption cref="T:Sysue-.ArgumenpOutOfRalgeExce0tion">
+  �"    <paramref namE="ind%x"`/> 또는 <paramruf nam%="count""/>가 음수佸 ʢ����</ehception>
+   $  =excd`thon cref="T:Sqstem.ArgumentException">
+        <paramref nqme?"index" />와 <paramref(name="countb />흘 합계ꐀ 버퍼 길이보다 큰 ꢽ우</ex�eption>
+ !    |exceRtion cref="T:System/NbjecdDispo{edExcEption">텍스트 판독기가 ���제된 겹욠</exceptiof>   !  <exceptinn cref="T:System.InvalidO`erationDxceqtionb>이전 읽꘰ 작업얐서 턐독기㥬 현잭 사l��하고 있슥닊다. </excePtion>
+    <.member>
+    <membe2 namm="M:System.IO.TextReader.Rea`Block(System.Chav[U,System.Int3(System/Int32)">
+      <summary>현재 텍스트 판독기에서 지���된 최대 수의 문자를 읽어 읶 데이터를 지정된 인덱스에서 시작되ꊔ 버퍼l�� 씁니다.8/summary>
+      <rmturns>읽읂 문��� 수입니다.�� 문자 수는 ���ʓ� 입력 문자를"읽�׈는쥀 ��부에 따땼 <p�ramref name="count  /:보다 작거나 같습니ꋤ.</returns>
+      <param name="budfer">이 메솜드가 반��할 때 이 매개 볐��엔銔 쥀정된 טּ�ΐ 배열의 겒̟� <paramref name<"index" /> k�� )<taramref name5"i.$ex" /> * <�aram2ef naie"couNt" /> -1) 사이��� 현쎬 소스로부��� 읽䖴온 문자로 교체된 상태로 들어 있습니다. <?param>
+      <param name="ind�x"<쓰j��를 시작할 <paramref name=buffer" />의 �܄쩘입���다.<'qaram>
+  (   <param name= count">읽썄 최대 문자 수입니다. </peraM>      <exceptkon cref="T:Ristem.ArgumentNuhlExaeption">
+        <paramref nale="`uffer"�/>가 ~}hl콸 경우 </exception>
+      <excdption sref= T:SystEm.Arg}mentUxceptkon">겄퍼 길이에서 <paramref name="mndex" />를 ���면 <`aramsef name=*cmunt" />보㋤ ���은 경우0</epceptmon>
+      <exception cref<"T:Sqrtem.ArgumentOu�OfRangeExcdption">
+        ,p�r!mref name="index" /> 또늖 <paramref nalu="coun4" />�� 䝌수인"경우 </exception>
+ �    <exception cref="T:System.ObjectDisposedExc�ptIoN">
+        <r�e cref="U:SysTem.IO.TextZeader" />가 닯힌 경캰 </excepuion>
+0     �exception cref="D:S�steo.IO.IOException">I/O 오류가 발샙하는 경웰 >/exception>
+      <filtErpriority>2</filterpriority>
+    </member>�    <member name="M:System,IO.TextReader.R�adBnockEsync(System.har[],[ystem.Int32.System.Ints2)">
+      <Summary>현재 텍芤劸 판독기에서 직정된 l��댠 문자 툘를 비동기졁으�� 읽�4 이 ���이터㥼0��쨕ꐜ 위치에서 시작��는 버퍼에 씁니다.</summapy>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 버퍼 안으로 읽어들인 총 바이트 수를 포함합니다.현재 사용할 수 있는 바이트 수가 요청된 수보다 작을 경우 결과 값이 요청된 바이트 수보다 작을 수 있으며 텍스트의 끝에 도달한 경우에는 0이 될 수도 있습니다.</returns>
+      <param name="buffer">이 메서드는 지정된 문자 배열의 값이 <paramref name="index" /> 및 (<paramref name="index" /> + <paramref name="count" /> - 1) 사이에서 현재 소스로부터 읽어온 문자로 교체된 상태로 반환됩니다.</param>
+      <param name="index">쓰기를 시작할 <paramref name="buffer" />의 위치입니다.</param>
+      <param name="count">읽을 최대 문자 수입니다.지정한 문자 수를 버퍼로 읽어오기 전에 텍스트의 끝에 도달하면 현재 메서드가 반환됩니다.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합계가 버퍼 길이보다 큰 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">텍스트 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextReader.ReadLine">
+      <summary>텍스트 판독기에서 한 줄의 문자를 읽고 데이터를 문자열로 반환합니다.</summary>
+      <returns>판독기의 다음 줄이거나 모든 문자를 읽은 경우 null입니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextReader" />가 닫힌 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">다음 줄의 문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큰 경우</exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextReader.ReadLineAsync">
+      <summary>한 줄의 문자를 비동기적으로 읽고 데이터를 문자열로 반환합니다. </summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 텍스트 판독기의 다음 줄을 포함하거나 모든 문자가 읽혀진 경우에는 null입니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">다음 줄의 문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">텍스트 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextReader.ReadToEnd">
+      <summary>현재 위치에서 텍스트 판독기 끝까지의 모든 문자를 읽어서 단일 문자열로 반환합니다.</summary>
+      <returns>현재 위치에서 텍스트 판독기 끝까지의 모든 문자를 포함하는 문자열입니다.</returns>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextReader" />가 닫힌 경우 </exception>
+      <exception cref="T:System.OutOfMemoryException">반환된 문자열을 위한 버퍼를 할당할 메모리가 부족한 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">다음 줄의 문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큰 경우</exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextReader.ReadToEndAsync">
+      <summary>현재 위치에서 텍스트 판독기 끝까지의 모든 문자를 비동기적으로 읽어서 하나의 문자열로 반환합니다.</summary>
+      <returns>비동기 읽기 작업을 나타내는 작업입니다.<paramref name="TResult" /> 매개 변수의 값은 현재 위치에서 텍스트 판독기 끝까지의 문자로 이루어진 문자열을 포함합니다.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">문자 수가 <see cref="F:System.Int32.MaxValue" />보다 큽니다.</exception>
+      <exception cref="T:System.ObjectDisposedException">텍스트 판독기가 삭제된 경우</exception>
+      <exception cref="T:System.InvalidOperationException">이전 읽기 작업에서 판독기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="T:System.IO.TextWriter">
+      <summary>일련의 문자를 연속하여 쓸 수 있는 작성기를 나타냅니다.이 클래스는 추상 클래스입니다.</summary>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.#ctor">
+      <summary>
+        <see cref="T:System.IO.TextWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.IO.TextWriter.#ctor(System.IFormatProvider)">
+      <summary>지정된 서식 공급자를 사용하여 <see cref="T:System.IO.TextWriter" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="formatProvider">서식 지정을 제어하는 <see cref="T:System.IFormatProvider" /> 개체입니다. </param>
+    </member>
+    <member name="F:System.IO.TextWriter.CoreNewLine">
+      <summary>이 TextWriter에 사용한 줄 바꿈 문자를 저장합니다.</summary>
+    </member>
+    <member name="M:System.IO.TextWriter.Dispose">
+      <summary>해당 <see cref="T:System.IO.TextWriter" /> 개체에서 사용하는 리소스를 모두 해제합니다.</summary>
+    </member>
+    <member name="M:System.IO.TextWriter.Dispose(System.Boolean)">
+      <summary>
+        <see cref="T:System.IO.TextWriter" />가 사용하는 관리되지 않는 리소스를 해제하고, 관리되는 리소스를 선택적으로 해제합니다.</summary>
+      <param name="disposing">관리되는 리소스와 관리되지 않는 리소스를 모두 해제하려면 true로 설정하고, 관리되지 않는 리소스만 해제하려면 false로 설정합니다. </param>
+    </member>
+    <member name="P:System.IO.TextWriter.Encoding">
+      <summary>파생 클래스에서 재정의된 경우 출력을 쓰는 문자 인코딩을 반환합니다.</summary>
+      <returns>출력을 쓰는 문자 인코딩입니다.</returns>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Flush">
+      <summary>현재 작성기에 대한 모든 버퍼를 지우면 버퍼링된 모든 데이터를 내부 장치에 씁니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.FlushAsync">
+      <summary>현재 작성기에 대한 모든 버퍼를 비동기적으로 지우면 버퍼링된 모든 데이터를 내부 장치에 씁니다. </summary>
+      <returns>비동기 플러시 작업을 나타내는 작업입니다. </returns>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="P:System.IO.TextWriter.FormatProvider">
+      <summary>서식 지정을 제어하는 개체를 가져옵니다.</summary>
+      <returns>특정 문화권에 대한 <see cref="T:System.IFormatProvider" /> 개체이거나, 다른 문화권을 지정하지 않은 경우 현재 문화권의 서식입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="P:System.IO.TextWriter.NewLine">
+      <summary>현재 TextWriter에서 사용한 줄 종결자 문자열을 가져오거나 설정합니다.</summary>
+      <returns>현재 TextWriter의 줄 종결자 문자열입니다.</returns>
+      <filterpriority>2</filterpriority>
+    </member>
+    <member name="F:System.IO.TextWriter.Null">
+      <summary>쓸 수는 있지만 읽을 수는 없는 백업 저장소를 TextWriter에 제공하지 않습니다.</summary>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Boolean)">
+      <summary>Boolean 값의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 Boolean 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Char)">
+      <summary>문자를 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">텍스트 스트림에 쓸 문자입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Char[])">
+      <summary>문자 배열을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="buffer">텍스트 스트림에 쓸 문자 배열입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다. </param>
+      <param name="index">데이터 검색을 시작하는 버퍼의 문자 위치입니다. </param>
+      <param name="count">쓸 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> 매개 변수가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Decimal)">
+      <summary>10진수 값의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 10진수 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Double)">
+      <summary>8바이트 부동 소수점 값의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 8바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Int32)">
+      <summary>부호 있는 4바이트 정수의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 있는 4바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Int64)">
+      <summary>부호 있는 8바이트 정수의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 있는 8바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Object)">
+      <summary>개체에 대해 ToString 메서드를 호출하여 해당 개체의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 개체입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.Single)">
+      <summary>4바이트 부동 소수점 값의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 4바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.String)">
+      <summary>문자열을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 문자열입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.String,System.Object)">
+      <summary>
+        <see cref="M:System.String.Format(System.String,System.Object)" /> 메서드와 동일한 의미 체계를 사용하여 서식이 지정된 문자열을 텍스트 문자열이나 스트림에 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조). </param>
+      <param name="arg0">서식을 지정하고 쓸 개체입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="format" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 형식 항목의 인덱스가 0보다 작거나, 형식을 지정할 개체의 수보다 크거나 같은 경우입니다. 즉, 이 메서드 오버로드의 경우는 1입니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.String,System.Object,System.Object)">
+      <summary>
+        <see cref="M:System.String.Format(System.String,System.Object,System.Object)" /> 메서드와 동일한 의미 체계를 사용하여 서식이 지정된 문자열을 텍스트 문자열이나 스트림에 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조). </param>
+      <param name="arg0">서식을 지정하고 쓸 첫 번째 개체입니다. </param>
+      <param name="arg1">서식을 지정하고 쓸 두 번째 개체입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="format" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 형식 항목의 인덱스가 0보다 작거나, 형식을 지정할 개체의 수보다 크거나 같은 경우입니다. 즉, 이 메서드 오버로드의 경우는 2입니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.String,System.Object,System.Object,System.Object)">
+      <summary>
+        <see cref="M:System.String.Format(System.String,System.Object,System.Object,System.Object)" /> 메서드와 동일한 의미 체계를 사용하여 서식이 지정된 문자열을 텍스트 문자열이나 스트림에 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조). </param>
+      <param name="arg0">서식을 지정하고 쓸 첫 번째 개체입니다. </param>
+      <param name="arg1">서식을 지정하고 쓸 두 번째 개체입니다. </param>
+      <param name="arg2">서식을 지정하고 쓸 세 번째 개체입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="format" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 형식 항목의 인덱스가 0보다 작거나, 형식을 지정할 개체의 수보다 크거나 같은 경우입니다. 즉, 이 메서드 오버로드의 경우는 3입니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.String,System.Object[])">
+      <summary>
+        <see cref="M:System.String.Format(System.String,System.Object[])" /> 메서드와 동일한 의미 체계를 사용하여 서식이 지정된 문자열을 텍스트 문자열이나 스트림에 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조). </param>
+      <param name="arg">서식을 지정하고 쓸 개체를 0개 이상 포함하는 개체 배열입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="format" /> 또는 <paramref name="arg" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 서식 항목의 인덱스가 0보다 작거나 <paramref name="arg" /> 배열의 길이보다 크거나 같습니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.UInt32)">
+      <summary>부호 없는 4바이트 정수의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 없는 4바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.Write(System.UInt64)">
+      <summary>부호 없는 8바이트 정수의 텍스트 표현을 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 없는 8바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteAsync(System.Char)">
+      <summary>문자를 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">텍스트 스트림에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteAsync(System.Char[])">
+      <summary>문자 배열을 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">텍스트 스트림에 쓸 문자 배열입니다.<paramref name="buffer" />가 null이면 아무 것도 쓰지 않습니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열을 텍스트 문자열 또는 스트림에 비동기적으로 씁니다. </summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다. </param>
+      <param name="index">데이터 검색을 시작하는 버퍼의 문자 위치입니다. </param>
+      <param name="count">쓸 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteAsync(System.String)">
+      <summary>문자열을 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다. </returns>
+      <param name="value">쓸 문자열입니다.<paramref name="value" />가 null이면 텍스트 스트림에 아무 것도 쓰지 않습니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine">
+      <summary>줄 종결자를 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Boolean)">
+      <summary>Boolean 값의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 Boolean 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Char)">
+      <summary>문자와 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">텍스트 스트림에 쓸 문자입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Char[])">
+      <summary>문자의 배열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="buffer">데이터를 읽을 문자 배열입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="buffer">데이터를 읽을 문자 배열입니다. </param>
+      <param name="index">데이터 읽기를 시작하는 <paramref name="buffer" />의 문자 위치입니다. </param>
+      <param name="count">쓸 최대 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentException">버퍼 길이에서 <paramref name="index" />를 빼면 <paramref name="count" />보다 작은 경우 </exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> 매개 변수가 null인 경우 </exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Decimal)">
+      <summary>10진수 값의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 10진수 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Double)">
+      <summary>8바이트 부동 소수점 값의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 8바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Int32)">
+      <summary>부호 있는 4바이트 정수의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 있는 4바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Int64)">
+      <summary>부호 있는 8바이트 정수의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 있는 8바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Object)">
+      <summary>개체에 대해 ToString 메서드를 호출하여 해당 개체의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 개체입니다.<paramref name="value" />가 null이면 줄 종결자만 씁니다.</param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.Single)">
+      <summary>4바이트 부동 소수점 값의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 4바이트 부동 소수점 값입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.String)">
+      <summary>문자열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 문자열입니다.<paramref name="value" />가 null이면 줄 종결자만 씁니다.</param>
+      <exception cref="T:System.ObjectDisposedxception*>
+        <see csgf= T:System.IO.Pe|tWbiter" />가 닫힌 경우 </excettion>
+      <exception cref=bT:System&HK.IOException">I/O 오류감 발생하는 경우 </exception>
+      <filt%rpriority>1</filterpriority>
+    </mem�er>
+    <-ember name="M:System.IO.TextWriter.WriteLine(System.String,SycTem.Objecti">
+     (<summary>
+    0   <see cref="M:System.String.FormaT(SqstumString,Sysuem.Object)" /> 멜서드䙀 동일한 읈미 체계를 사용하엌 섘식읤 지정된 문자열과 죈 줄읆 ���스트 문��열이나 스트림에 씁니鋤.</swmmary>
+      <param name="form`t">합성 형식 문자열입니다 설명 부분 참조).</param>
+      <param name="arg4">섞식을 지정하겠 ��$개체입니다. </Param>
+      <exception cref"T2System.Argume~tNullE8ception">
+(       <paramref name="format" />가�null인 경우 </uxcepdion>
+      <exception cre&="T:System.Objec�Dispose�Exception">
+   �    <sue cref="T:System.IO.TextWriter" />가 닫垌 경우 </eyception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 형식 항목의 인덱스가 0보다 작거나, 형식을 지정할 개체의 수보다 크거나 같은 경우입니다. 즉, 이 메서드 오버로드의 경우는 1입니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.String,System.Object,System.Object)">
+      <summary>
+        <see cref="M:System.String.Format(System.String,System.Object,System.Object)" /> 메서드와 동일한 의미 체계를 사용하여 서식이 지정된 문자열과 새 줄을 텍스트 문자열이나 스트림에 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조).</param>
+      <param name="arg0">서식을 지정하고 쓸 첫 번째 개체입니다. </param>
+      <param name="arg1">서식을 지정하고 쓸 k�� 번째 개체입니다. </param�
+      <exception cref="T:System*ArgumdntNullException">
+       0<paramref namE="format" />가 null인 경|�� </except)on>      <exception cref="T:System.OcjectD)cpsedExsepvion">
+        <see cref="T:System.IO\extWriver" />간 닫힌0ⲽ우 </epaeption>
+      <exceptioo cref="T:System.IO.KOException">I/O 오류가 발생하는 경우 </exception>
+      <exceptinn cref="T:Systeo.FormatException">
+        <paramref name="format" />이 유효한 합성 서틝 문자열이 아닙니ꋤ>또��� 서식 항목�� 인㉱스가 0보닄 힑거나 형식을 지정할0개체의 수보돤 퉬거나 같은 경우���니다. 즉, 이 메서드 오버롌드의 붽우는 2입니다. </except�on>J    � <filterprio�ity>1</filterprioritq>
+    </member>
+    <mmmb�r name="M:Susde�.IO.TextWriver.Writ�Line(System.Ct2ing,System.�bject,System.Object,S{stem.Obj$ct)">M
+      <summary>
+        <sed(crev="M:Syspem.String.Format(System.String,System.Object)" />과 같은 의미 체계를 사용하여 서식이 지정된 문자열과 새 줄을 씁니다.</summary>
+      <param name="format">합성 형식 문자열입니다(설명 부분 참조).</param>
+      <param name="arg0">서식을 지정하고 쓸 첫 번째 개체입니다. </param>
+      <param name="arg1">서식을 지정하고 쓸 두 번째 개체입니다. </param>
+      <param name="arg2">서식을 지정하고 쓸 세 번째 개체입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="format" />가 null인 경우 </exception>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 형식 항목의 인덱스가 0보다 ̞�거나, 형식을 지정할 갔체흘 수보다 크���나 같은 경우입니다. 즉, 이0메서�� 오버로드의 경우는 3입니다. </exception>
+      <filterpriority>5</filterpriority>
+    </member>
+�   <}em"er oaee�"M:System.IO.TextWriter.WriteLinu(System.StrinwlSyctem.Object[]-">
+      <summary>
+        <see cre`="M:System.Rtring.Format(Syste.Suring,Systei.Object)" />과 같은 콘미 貴곀맼 사䒩하여 서식윴 지정된 문자열과 새 줄을`씁니다.</suemar�>
+      <param name="format":합섰 형식 문자열입니다(설명 부분 참조).</param>
+      <param n`me-"a2g">서식을 지정하고 쓸 개쳴를 0개 이싁 포함하는 개체 배열입니다. </param>
+    ! <exception cref="T:Sys4em.Argumen|NullExceptionb>鬸자열이나 개체가 null로 전달k��늖 경우 </exception>
+      <exCeption cref="T:Sys�em.ObjectDmspos�dException">�
+        <see cref?"T:Sys|em.IO.TextWritev"�/>감 닫힌 경우 </exception>
+      <ezception cref="T;Wystem.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <exception cref="T:System.FormatException">
+        <paramref name="format" />이 유효한 합성 서식 문자열이 아닙니다.또는 서식 항목의 인덱스가 0보다 작거나 <paramref name="arg" /> 배열의 길이보다 크거나 같습니다. </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.UInt32)">
+      <summary>부호 없는 4바이트 정수의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 없는 4바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLine(System.UInt64)">
+      <summary>부호 없는 8바이트 정수의 텍스트 표현과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 씁니다.</summary>
+      <param name="value">쓸 부호 없는 8바이트 정수입니다. </param>
+      <exception cref="T:System.ObjectDisposedException">
+        <see cref="T:System.IO.TextWriter" />가 닫힌 경우 </exception>
+      <exception cref="T:System.IO.IOException">I/O 오류가 발생하는 경우 </exception>
+      <filterpriority>1</filterpriority>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLineAsync">
+      <summary>줄 종결자를 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다. </returns>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLineAsync(System.Char)">
+      <summary>문자와 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">텍스트 스트림에 쓸 문자입니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLineAsync(System.Char[])">
+      <summary>문자의 배열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">텍스트 스트림에 쓸 문자 배열입니다.문자 배열이 null이면 줄 종결자만 씁니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLineAsync(System.Char[],System.Int32,System.Int32)">
+      <summary>문자의 하위 배열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 비동기적으로 씁니다.</summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="buffer">쓸 데이터가 있는 문자 배열입니다. </param>
+      <param name="index">데이터 검색을 시작하는 버퍼의 문자 위치입니다. </param>
+      <param name="count">쓸 문자 수입니다. </param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" />가 null인 경우</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="index" />와 <paramref name="count" />의 합이 버퍼 길이보다 큽니다.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="index" /> 또는 <paramref name="count" />가 음수인 경우</exception>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+    <member name="M:System.IO.TextWriter.WriteLineAsync(System.String)">
+      <summary>문자열과 줄 종결자를 차례로 텍스트 문자열 또는 스트림에 비동기적으로 씁니다. </summary>
+      <returns>비동기 쓰기 작업을 나타내는 작업입니다.</returns>
+      <param name="value">쓸 문자열입니다.값이 null이면 줄 종결자만 씁니다.</param>
+      <exception cref="T:System.ObjectDisposedException">텍스트 작성기가 삭제됩니다.</exception>
+      <exception cref="T:System.InvalidOperationException">이전 쓰기 작업에서 텍스트 작성기를 현재 사용하고 있습니다. </exception>
+    </member>
+  </members>
+</doc>

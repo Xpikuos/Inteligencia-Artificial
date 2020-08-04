@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="GUIXudon.Controls.Gate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUIXudon.Controls"
+             mc:Ignorable="d" Height="50" Width="320.318" BorderBrush="Black" BorderThickness="2">
+    <Grid Name="GridGateContainer">
+        <Canvas Name="CanvasGateContainer">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Canvas.Background>
+            <!--<Button Content="K" Width="22" RenderTransformOrigin="-0.081,1.188"/>-->
+        </Canvas>
+    </Grid>
+</UserControl>

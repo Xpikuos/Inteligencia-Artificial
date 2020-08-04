@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="GUIXudon.Controls.UserControlRegionsManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUIXudon.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="20">
+    <Grid ToolTip="Regions Manager">
+        <StackPanel x:Name="StackPannelForRectangles" Orientation="Horizontal">
+            <!--<Rectangle HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="29" Fill="LightGreen"/>
+            <Rectangle HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="10" Fill="OrangeRed"/>-->
+        </StackPanel>
+    </Grid>
+</UserControl>

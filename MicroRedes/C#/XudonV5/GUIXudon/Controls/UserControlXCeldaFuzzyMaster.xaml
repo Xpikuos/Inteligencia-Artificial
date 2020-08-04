@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="GUIXudon.Controls.UserControlXCeldaFuzzyMaster"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUIXudon.Controls"
+             mc:Ignorable="d">
+    <Grid Background="White" ToolTip="XCell-FuzzyMaster">
+        <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
+            <StackPanel x:Name="MainStackPannelFuzzyMaster" Margin="10" Orientation="Vertical">
+                <!--<StackPanel x:Name="StackPannelLayerOrExplode" ToolTip="Layer OR-Explode" Height="100" Background="LightGray" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" Width="25"  Margin="0,5,5,5">
+                        <Label x:Name="LayerName" Content="OR-EXP" FontFamily="Verdana" FontStyle="Normal" FontWeight="Bold" FontSize="14" RenderTransformOrigin="0.919,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="-4,-8,-1,-8">
+                            <Label.LayoutTransform>
+                                <TransformGroup>
+                                    <RotateTransform Angle="270" />
+                                </TransformGroup>
+                            </Label.LayoutTransform>
+                        </Label>
+                    </Border>
+                </StackPanel>-->
+                <local:LayerControl Height="150" x:Name="LayerControlOrExplode"/>
+                <Rectangle Height="10"></Rectangle>
+                <!--<StackPanel x:Name="StackPannelForXCellsFuzzy"  Height="120" Background="LightGray" Orientation="Horizontal" />-->
+                <local:LayerControl Height="120" x:Name="LayerControlForXCellsFuzzy"/>
+                <Rectangle Height="10"></Rectangle>
+                <!--<local:UserControlRegionsManager x:Name="RegionsManagerUC"/>-->
+                <local:LayerControl Height="35" x:Name="LayerControlForRegionsManager"/>
+                <Rectangle Height="10"></Rectangle>
+                <!--<local:UserControlHistogram Height="100" x:Name="HistogramUC"/>-->
+                <local:LayerControl Height="115" x:Name="LayerControlForHistogram"/>
+                <Label Content="FUZZY-MASTER" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
